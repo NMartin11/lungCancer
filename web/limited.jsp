@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%@ page import="lungCancer.CoeffecientPrep" %>
+
 <%@ page import="lungCancer.Limited" %>
-<%@ page import = "java.util.ArrayList" %>
-<%@ page import = "java.util.HashMap" %>
+
+
 <script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
 <title>Limited Small Cell</title>
@@ -20,22 +20,21 @@
 	<h3>Prophylactic Cranial Irradiation:</h3>
 	Yes<input type = "radio" name = "pci" value = "1" required = "required" />
 	No<input type = "radio" name = "pci" value = "0" /><br><br>
-	
-	<h3>Red Cell Distribution Width:</h3>
+
+	<h3>Red Cell Distribution Width (Reference rage: 11-15%)</h3>
 	<input id = "ln_rdw" type = "number" name = "ln_rdw" placeholder = "rdw"/>
-	
-	
-	<h4>Lymphocyte</h4>
-	<input id = "lymphocyte"type = "number" name = "lymphocyte" min = "0"/>
-	
-	<h4>Neutrophil</h4>
-	<input id = "neutrophil" type = "number" name = "neutrophil" min = "0"/><br>
-	
-	<h4>Platelet:</h4>
-	<input id = "platelet"type = "number" name = "platelet" min = "0"/><br>
-	
-	<h3>Hemoglobin:</h3>
-	<input id = "hbx" type = "number" name = "hbx" min = "0"/>
+
+	<h3>Lymphocyte (Reference range: 1300-3500 counts per L)</h3>
+	<input type = "number" name = "lymphocyte" min = "0" />
+
+	<h3>Neutrophil (Reference range: 2000-7500 counts per L)</h3>
+	<input type = "number" name = "neutrophil" min = "0" /><br>
+
+	<h3>Platelet (Reference range: 140-450 counts per L)</h3>
+	<input type = "number" name = "platelet" min = "0" /><br>
+
+	<h3>Hemoglobin (Reference range: 120-180g per L)</h3>
+	<input type = "number" name = "hbx" min = "0" />
 	
 	<h3>ECOG Performance Score:</h3>
 			<select id = "ps" name = "ps">
@@ -67,22 +66,22 @@
 function limitedPage()
 {
 	var pci = $("input[name=pci]:checked").val();
-	window.alert(pci);
+
 	
 	var ln_rdw = $('#ln_rdw').val();
-	window.alert(ln_rdw);
+
 	
 	var lymphocyte = $("#lymphocyte").val();
-	window.alert(lymphocyte);
+
 	
 	var neutrophil = $("#neutrophil").val();
-	window.alert(neutrophil);
+
 	
 	var platelet = $("#platelet").val();
-	window.alert(platelet);
+
 	
 	var hbx = $("#hbx").val();
-	window.alert(hbx);
+
 	
 	var e = document.getElementById("ps");
 	var ecog;
@@ -93,24 +92,11 @@ function limitedPage()
 				ecog = e[i].value;
 				}
 		}
-	window.alert(ecog);
+
 	
 	var quit = $('input[name=pci]:checked').val();
-	window.alert(quit);
-/*	
-	if(pci != null && quit != null)
-		{
-			if(pci == 'pci' || quit == 'quit')
-				{
-					document.getElementById('form_id').action = 'limitedCurve.jsp';
-				}
-			else(pci == 'null' || quit == 'null')
-			{
-				document.getElementById('form_id').action = 'extendedCurve.jsp';
-			}
-			
-		}
-*/
+
+
 }
 
 </script>

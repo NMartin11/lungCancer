@@ -17,7 +17,7 @@ public class NSC extends CoeffecientPrep{
 	 * runNSC(request,response)--> Gets all parameters and calculates survival rate: returns string
 	 *  
 	 */
-	
+
 	public String runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
@@ -29,13 +29,12 @@ public class NSC extends CoeffecientPrep{
 		prep.setModel("background");
 		prep.setBaseline();
 		prep.setCoefficients(request, response);
-		System.out.println("Check coeffModel values " + prep.getCoefficients());
 
 		List<Object> list = prep.getCoefficients();
-		
 		double sum = calcSum(list, prep.getModel());
 		String results = prep.calculate(sum);
-		System.out.println("Results: " + results);
+
+
 		return results;
 	}
 	

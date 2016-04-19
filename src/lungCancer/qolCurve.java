@@ -106,22 +106,22 @@ public class qolCurve extends CoeffecientPrep{
 		System.out.println("Values in list array =" + list);
 
 		int index;
-		
+
 		index = list.indexOf("fatigue");
 		double fatigue = Double.parseDouble((list.get(index + 1).toString()));
 		list.remove(index + 1);
-		list.add(index + 1, fatigue);
-		
+		list.add(index + 1, comorbVal(fatigue));
+
 		index = list.indexOf("cough");
 		double cough = Double.parseDouble((list.get(index + 1).toString()));
 		list.remove(index + 1);
-		list.add(index + 1,cough);
-		
+		list.add(index + 1,comorbVal(cough));
+
 		index = list.indexOf("dyspnea");
 		double dyspnea = Double.parseDouble((list.get(index + 1).toString()));
 		list.remove(index + 1);
-		list.add(index + 1,dyspnea);
-		
+		list.add(index + 1,comorbVal(dyspnea));
+
 		double sum = prep.calcSum(list, prep.getModel());
 		String results = prep.calculate(sum);
 		System.out.println("Results: " + results);

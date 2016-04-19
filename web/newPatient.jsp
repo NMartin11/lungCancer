@@ -27,8 +27,8 @@
 Age:<input type = "text" name = "agedx" id = "agedx"/><br>
 
 <h3>Gender</h3>
-Male <input type = "radio" name = "gender" value = "1" id = "gender"/><br>
-Female <input type = "radio" name = "gender" value = "0" id = "gender"/><br>
+Male <input type = "radio" name = "gender" value = "1"/><br>
+Female <input type = "radio" name = "gender" value = "0"/><br>
 
 <h3>Smoking History</h3>
 Current Smoker: <input type = "checkbox" name = "smkcurrent" value = "1"/><br>
@@ -40,7 +40,7 @@ Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 	<option value="adeno" >Adenocarcinoma</option>
 	<option value="squamous">Squamous Cell Carcinoma</option>
 	<option value="largecell" >Large Cell Carcinoma</option>
-	<option value="carcinoid" >Bronchoalveolar Carcinoma</option>
+	<option value="reference" >Bronchoalveolar Carcinoma</option>
 	<option value="carcinoid" >Carcinoid</option>
 	<option value="limited" >Limited-stage Small Cell Carcinoma</option>
 	<option value="extensive">Extensive-stage Small Cell Carcinoma</option>
@@ -65,7 +65,7 @@ Moderate 	<input type = "checkbox" name = "grademoderate" value = "1"/><br>
 Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 
 <h3>Treatment to Date</h3>
-<!-- TODO: same thing I did for celltype javascript -->
+
 <select id = "treatment" name = "treatment" size="5" multiple="multiple">
 	<option value="background" selected = "selected">--Please Pick Treatment--</option>
 	<option value="surgery">Surgery Only</option>
@@ -108,12 +108,11 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 <script type="text/javascript">
 	function destination()
 	{
-		
 		var age = $('#agedx').val();
-		window.alert("age = " + age);
+		//window.alert("age = " + age);
 		
 		var gender = $("input[name=gender]:checked").val();
-		window.alert("gender = " + gender);
+		//window.alert("gender = " + gender);
 		
 		var type = document.getElementById("celltype");
 		var celltype;
@@ -128,7 +127,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 			}
 		var x = document.getElementById("celltype").getAttribute("name");
 		var y = document.getElementById("celltype").getAttribute("value");
-		window.alert("celltype name = " + x + " celltype value = " + y);
+		//window.alert("celltype name = " + x + " celltype value = " + y);
 		
 		
 		var s = document.getElementById("stage");
@@ -142,10 +141,10 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 					document.getElementById("stage").setAttribute("value",1);
 					}
 			}
-		window.alert(stage);
+		//window.alert(stage);
 		
 		var grade = $("input[name=grade]:checked").val();
-		window.alert(grade);
+		//window.alert(grade);
 		
 		var t = document.getElementById("treatment");
 		var treatment = [];
@@ -161,13 +160,13 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 		window.alert(treatment);
 		
 		var symptoms = $("input[name=reported]:checked").val();
-		window.alert(symptoms);
+		//window.alert(symptoms);
 		
 		var recurrence = $("input[name=recurrence]:checked").val();
-		window.alert(recurrence);
+		//window.alert(recurrence);
 		
 		var bmarker = $("input[name=bloodMark]:checked").val();
-		window.alert(bmarker);
+		//window.alert(bmarker);
 		
 		if(symptoms == '1')
 			{

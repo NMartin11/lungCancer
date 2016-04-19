@@ -15,20 +15,20 @@
 <!-- put all variables from limited and extended small cell on this page -->
 
 <form action = "extensiveCurve.jsp" method = "post">
-	
-	<h3>Red Cell Distribution Width:</h3>
+
+	<h3>Red Cell Distribution Width (Reference rage: 11-15%)</h3>
 	<input type = "number" name = "ln_rdw" placeholder = "rdw"/>
-	
-	<h4>Lymphocyte</h4>
+
+	<h3>Lymphocyte (Reference range: 1300-3500 counts per L)</h3>
 	<input type = "number" name = "lymphocyte" min = "0" />
-	
-	<h4>Neutrophil</h4>
+
+	<h3>Neutrophil (Reference range: 2000-7500 counts per L)</h3>
 	<input type = "number" name = "neutrophil" min = "0" /><br>
-	
-	<h4>Platelet:</h4>
+
+	<h3>Platelet (Reference range: 140-450 counts per L)</h3>
 	<input type = "number" name = "platelet" min = "0" /><br>
-	
-	<h3>Hemoglobin:</h3>
+
+	<h3>Hemoglobin (Reference range: 120-180g per L)</h3>
 	<input type = "number" name = "hbx" min = "0" />
 	
 	<h3>ECOG Performance Score:</h3>

@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,26 +22,10 @@ public class CoeffecientPrep extends HttpServlet{
 	private List<Object> modelCoeff;
 	private List<Double> baseline = new ArrayList<>();
 	private HashMap<String,Double> model = new HashMap<>();
+	public String[] treatments;
 	
 	
 	//----------------------Methods--------------------------
-	
-	/*Gets Names of Parameters and returns them in a ArrayList
-	public ArrayList<String> getParamNames(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{	
-		ArrayList<String> testList = new ArrayList<String>();
-
-		
-		Enumeration paramNames = request.getParameterNames();
-		while(paramNames.hasMoreElements())
-		{
-			String paramName = (String)paramNames.nextElement();
-			testList.add(paramName);
-			System.out.println("Parameter name: " + paramName); 
-		}
-		return testList;
-	}
-*/	
 	
 	//Sets values of Parameters and returns them in a list of objects
 	public void setCoefficients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -281,11 +262,13 @@ public class CoeffecientPrep extends HttpServlet{
 	    return containsDigit;
 	}
 
-	
+
 	
 	public static void main(String[] args) {
-		
-		
+
+
 	}
+
+
 
 }
