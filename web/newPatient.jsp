@@ -8,7 +8,7 @@
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.HashMap" %>
 <script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script language="javascript" type="text/javascript" src="/flot/jquery-1.12.3.min.js"></script>
 <title>Lung Cancer Tool</title>
 </head>
 <body>
@@ -36,7 +36,7 @@ Former Smoker:  <input type = "checkbox" name = "smkformer" value = "1"/><br>
 Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 
 <h3>Cell Type</h3>
-<select id = "celltype" name = "celltype" onchange = "changeAttr(this);">
+<select id = "celltype" name = "celltype">
 	<option value="adeno" >Adenocarcinoma</option>
 	<option value="squamous">Squamous Cell Carcinoma</option>
 	<option value="largecell" >Large Cell Carcinoma</option>
@@ -46,6 +46,16 @@ Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 	<option value="extensive">Extensive-stage Small Cell Carcinoma</option>
 	<option value= "other" >Other NSCLC</option>
 </select>
+	<script type="javascript">
+		$('#celltype').change(function(e){
+			if($(this).val() == "extensive"){
+				alert('hi');
+				$("#treatment option[value='surgery']").prop('disabled',true);
+			}
+			else $("#size option[value='surgery']").prop('disabled',false);
+		});
+
+	</script>
 
 <h3>Stage</h3>
 <!-- TODO: same thing I did for celltype javascript -->
