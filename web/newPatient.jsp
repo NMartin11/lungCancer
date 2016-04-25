@@ -7,8 +7,7 @@
 <%@ page import="lungCancer.CoeffecientPrep" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.HashMap" %>
-<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/flot/jquery-1.12.3.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/flot/jquery.min.js"></script>
 <title>Lung Cancer Tool</title>
 </head>
 <body>
@@ -36,24 +35,45 @@ Former Smoker:  <input type = "checkbox" name = "smkformer" value = "1"/><br>
 Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 
 <h3>Cell Type</h3>
-<select id = "celltype" name = "celltype">
+<select id = "celltype" name = "celltype" onchange="change()">
 	<option value="adeno" >Adenocarcinoma</option>
 	<option value="squamous">Squamous Cell Carcinoma</option>
 	<option value="largecell" >Large Cell Carcinoma</option>
 	<option value="reference" >Bronchoalveolar Carcinoma</option>
 	<option value="carcinoid" >Carcinoid</option>
 	<option value="limited" >Limited-stage Small Cell Carcinoma</option>
-	<option value="extensive">Extensive-stage Small Cell Carcinoma</option>
-	<option value= "other" >Other NSCLC</option>
+	<option value="extensive" >Extensive-stage Small Cell Carcinoma</option>
+	<option hidden value="smallcell">smallcell</option>
+	<option value= "other"  >Other NSCLC</option>
 </select>
-	<script type="javascript">
-		$('#celltype').change(function(e){
-			if($(this).val() == "extensive"){
-				alert('hi');
-				$("#treatment option[value='surgery']").prop('disabled',true);
+	<script type="text/javascript">
+
+function change()
+{
+	var type = document.getElementById("celltype");
+	var valtype = type.options[type.selectedIndex].value;
+
+		if(valtype == "extensive" || valtype == 'limited')
+		{
+			document.getElementById("treatment").options[0].disabled = true;
+			document.getElementById("treatment").options[1].disabled = true;
+			document.getElementById("treatment").options[3].disabled = true;
+			document.getElementById("treatment").options[4].disabled = true;
+			document.getElementById("treatment").options[5].disabled = true;
+			document.getElementById("treatment").options[7].disabled = true;
+			document.getElementById("treatment").options[8].disabled = true;
+		}
+			else
+			{
+				document.getElementById("treatment").options[0].disabled = false;
+				document.getElementById("treatment").options[1].disabled = false;
+				document.getElementById("treatment").options[3].disabled = false;
+				document.getElementById("treatment").options[4].disabled = false;
+				document.getElementById("treatment").options[5].disabled = false;
+				document.getElementById("treatment").options[7].disabled = false;
+				document.getElementById("treatment").options[8].disabled = false;
 			}
-			else $("#size option[value='surgery']").prop('disabled',false);
-		});
+}
 
 	</script>
 
@@ -95,8 +115,30 @@ Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 
 
 <h3>Recurrence</h3>
-Yes <input type = "radio" name = "recurrence" value = "1"/>
+Yes <input type = "radio" name = "recurrence" value = "1" onclick="changeCelltype();"/>
 No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
+<script type="text/javascript">
+	function changeCelltype()
+	{
+		var recurrence = $("input[name=recurrence]:checked").val();
+		var celltype;
+		var type = document.getElementById("celltype");
+		for(var i = 0; i < type.length; i++)
+		{
+			if(type[i].selected)
+			{
+				celltype = type[i].value;
+			}
+		}
+		if(recurrence == '1' && (celltype == 'limited' || celltype == 'extensive'))
+		{
+			document.getElementById("celltype").value = 'smallcell';
+			window.alert('changed celltype to small cell');
+		}
+		window.alert('did not do a thing');
+	}
+
+</script>
 
 <h3>Blood Marker</h3>
 Yes<input type = "radio" name = "bloodMark" value="1" /><br>
@@ -177,7 +219,9 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 		
 		var bmarker = $("input[name=bloodMark]:checked").val();
 		//window.alert(bmarker);
-		
+
+
+
 		if(symptoms == '1')
 			{
 				document.getElementById('form_id').action = 'qol.jsp';	
@@ -200,7 +244,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 			}
 		else if(celltype == 'extensive')
 			{
-				if(bmarker == 'null')
+				if(bmarker == '0')
 					{
 					window.alert('Please provide blood testings for Small Cell Lung Cancer');
 					}
@@ -211,7 +255,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 			}
 		else
 			{
-				if(bmarker == 'bloodMark')
+				if(bmarker == '1')
 					{
 					window.alert('Model not available');
 					}
