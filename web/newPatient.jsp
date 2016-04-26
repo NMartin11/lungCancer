@@ -78,7 +78,8 @@ function change()
 	</script>
 
 <h3>Stage</h3>
-<!-- TODO: same thing I did for celltype javascript -->
+<!-- TODO: iif stageia and stageib == stagei -->
+<!-- TODO: iif stageiib and stageib == stageii -->
 <select id = "stage" name = "stage">
 	<option value="stageia" selected="selected" >Stage IA</option>
 	<option value="stageib" >Stage IB</option>
@@ -226,10 +227,12 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 			{
 				document.getElementById('form_id').action = 'qol.jsp';	
 			}
-		else if(recurrence == '1')
-			{
-				document.getElementById('form_id').action = 'recurrence.jsp';
-			}
+		else if(recurrence == '1' && treatment=='surgery'||recurrence == '1' && treatment=='surgchemo'||
+				recurrence == '1' && treatment=='surgradiation'||recurrence == '1' && treatment=='surgradiationchemo'||
+				recurrence == '1' && treatment=='neoadjuvent')
+		{
+			document.getElementById('form_id').action = 'recurrence.jsp';
+		}
 		else if(celltype == 'limited')
 			{
 				if(bmarker == 'null')
@@ -253,9 +256,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 						document.getElementById('form_id').action = 'extensive.jsp';
 					}	
 			}
-		else
-			{
-				if(bmarker == '1')
+		else if(bmarker == '1')
 					{
 					window.alert('Model not available');
 					}
@@ -265,7 +266,6 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 					{
 			}
 		}
-	}
 }
 	
 </script>
