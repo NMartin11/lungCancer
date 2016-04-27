@@ -46,14 +46,14 @@ Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 	<option hidden value="smallcell">smallcell</option>
 	<option value= "other"  >Other NSCLC</option>
 </select>
-	<script type="text/javascript">
+<script type="text/javascript">
 
 function change()
 {
 	var type = document.getElementById("celltype");
 	var valtype = type.options[type.selectedIndex].value;
 
-		if(valtype == "extensive" || valtype == 'limited')
+		if(valtype == "extensive")
 		{
 			document.getElementById("treatment").options[0].disabled = true;
 			document.getElementById("treatment").options[1].disabled = true;
@@ -62,20 +62,30 @@ function change()
 			document.getElementById("treatment").options[5].disabled = true;
 			document.getElementById("treatment").options[7].disabled = true;
 			document.getElementById("treatment").options[8].disabled = true;
+		} else if(valtype == 'limited')
+		{
+			document.getElementById("treatment").options[0].disabled = true;
+			document.getElementById("treatment").options[1].disabled = true;
+			document.getElementById("treatment").options[3].disabled = true;
+			document.getElementById("treatment").options[5].disabled = true;
+			document.getElementById("treatment").options[7].disabled = true;
+			document.getElementById("treatment").options[8].disabled = true;
 		}
 			else
 			{
 				document.getElementById("treatment").options[0].disabled = false;
 				document.getElementById("treatment").options[1].disabled = false;
+				document.getElementById("treatment").options[2].disabled = false;
 				document.getElementById("treatment").options[3].disabled = false;
 				document.getElementById("treatment").options[4].disabled = false;
 				document.getElementById("treatment").options[5].disabled = false;
+				document.getElementById("treatment").options[6].disabled = false;
 				document.getElementById("treatment").options[7].disabled = false;
 				document.getElementById("treatment").options[8].disabled = false;
 			}
 }
 
-	</script>
+</script>
 
 <h3>Stage</h3>
 <!-- TODO: iif stageia and stageib == stagei -->
@@ -134,9 +144,12 @@ No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
 		if(recurrence == '1' && (celltype == 'limited' || celltype == 'extensive'))
 		{
 			document.getElementById("celltype").value = 'smallcell';
-			window.alert('changed celltype to small cell');
+			//window.alert('changed celltype to small cell');
 		}
-		window.alert('did not do a thing');
+			else
+			{
+				//window.alert('did not do a thing');
+			}
 	}
 
 </script>
@@ -210,7 +223,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 			}
 		t.setAttribute("name", treatment);
 		
-		window.alert(treatment);
+		//window.alert(treatment);
 		
 		var symptoms = $("input[name=reported]:checked").val();
 		//window.alert(symptoms);
