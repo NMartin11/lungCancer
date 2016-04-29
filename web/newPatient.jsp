@@ -7,7 +7,7 @@
 <%@ page import="lungCancer.CoeffecientPrep" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.HashMap" %>
-	<script language="JavaScript" type="text/javascript" src="/flot/jquery.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="flot/jquery.min.js"></script>
 <title>Lung Cancer Tool</title>
 </head>
 <body>
@@ -35,7 +35,7 @@ Former Smoker:  <input type = "checkbox" name = "smkformer" value = "1"/><br>
 Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 
 <h3>Cell Type</h3>
-<select id = "celltype" name = "celltype" onchange="change()">
+<select id = "celltype" name = "celltype">
 	<option value="adeno" >Adenocarcinoma</option>
 	<option value="squamous">Squamous Cell Carcinoma</option>
 	<option value="largecell" >Large Cell Carcinoma</option>
@@ -43,7 +43,6 @@ Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 	<option value="carcinoid" >Carcinoid</option>
 	<option value="limited" >Limited-stage Small Cell Carcinoma</option>
 	<option value="extensive" >Extensive-stage Small Cell Carcinoma</option>
-	<option hidden value="smallcell">smallcell</option>
 	<option value= "other"  >Other NSCLC</option>
 </select>
 <script type="text/javascript">
@@ -52,37 +51,38 @@ function change()
 {
 	var type = document.getElementById("celltype");
 	var valtype = type.options[type.selectedIndex].value;
-
-		if(valtype == "extensive")
-		{
-			document.getElementById("treatment").options[0].disabled = true;
+	
+		if(valtype == "extensive") {
 			document.getElementById("treatment").options[1].disabled = true;
-			document.getElementById("treatment").options[3].disabled = true;
 			document.getElementById("treatment").options[4].disabled = true;
 			document.getElementById("treatment").options[5].disabled = true;
 			document.getElementById("treatment").options[7].disabled = true;
 			document.getElementById("treatment").options[8].disabled = true;
-		} else if(valtype == 'limited')
-		{
-			document.getElementById("treatment").options[0].disabled = true;
-			document.getElementById("treatment").options[1].disabled = true;
-			document.getElementById("treatment").options[3].disabled = true;
+		} else if(valtype == "limited") {
 			document.getElementById("treatment").options[5].disabled = true;
 			document.getElementById("treatment").options[7].disabled = true;
 			document.getElementById("treatment").options[8].disabled = true;
+		} else if(document.getElementById("reported_y").checked) {
+			document.getElementById("treatment").options[8].disabled = true;
+		} else if(document.getElementById("recurrence_y").checked) {
+			document.getElementById("treatment").options[2].disabled = true;
+			document.getElementById("treatment").options[3].disabled = true;
+			document.getElementById("treatment").options[6].disabled = true;
+			document.getElementById("treatment").options[8].disabled = true;
+			document.getElementById("treatment").options[9].disabled = true;
+
+		} else {
+			document.getElementById("treatment").options[0].disabled = false;
+			document.getElementById("treatment").options[1].disabled = false;
+			document.getElementById("treatment").options[2].disabled = false;
+			document.getElementById("treatment").options[3].disabled = false;
+			document.getElementById("treatment").options[4].disabled = false;
+			document.getElementById("treatment").options[5].disabled = false;
+			document.getElementById("treatment").options[6].disabled = false;
+			document.getElementById("treatment").options[7].disabled = false;
+			document.getElementById("treatment").options[8].disabled = false;
+			document.getElementById("treatment").options[9].disabled = false;
 		}
-			else
-			{
-				document.getElementById("treatment").options[0].disabled = false;
-				document.getElementById("treatment").options[1].disabled = false;
-				document.getElementById("treatment").options[2].disabled = false;
-				document.getElementById("treatment").options[3].disabled = false;
-				document.getElementById("treatment").options[4].disabled = false;
-				document.getElementById("treatment").options[5].disabled = false;
-				document.getElementById("treatment").options[6].disabled = false;
-				document.getElementById("treatment").options[7].disabled = false;
-				document.getElementById("treatment").options[8].disabled = false;
-			}
 }
 
 </script>
@@ -107,7 +107,7 @@ Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 
 <h3>Treatment to Date</h3>
 
-<select id = "treatment" name = "treatment" size="5" multiple="multiple">
+<select id = "treatment" name = "treatment" size="5" multiple="multiple" onclick="change();">
 	<option value="background" selected = "selected">--Please Pick Treatment--</option>
 	<option value="surgery">Surgery Only</option>
 	<option value="chemo">Chemotherapy Only</option>
@@ -121,12 +121,12 @@ Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 </select>
 
 <h3>Self Reported Symptoms</h3><br>
-	Yes<input type = "radio" name = "reported" value = "1"/>
+	Yes<input type = "radio" id="reported_y" name = "reported" value = "1"/>
 	No <input type = "radio" name = "reported" value = "0" checked = "checked"/>
 
 
 <h3>Recurrence</h3>
-Yes <input type = "radio" name = "recurrence" value = "1" onclick="changeCelltype();"/>
+Yes <input type = "radio" id="recurrence_y" name = "recurrence" value = "1" onclick="changeCelltype();"/>
 No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
 <script type="text/javascript">
 	function changeCelltype()
@@ -155,7 +155,7 @@ No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
 </script>
 
 <h3>Blood Marker</h3>
-Yes<input type = "radio" name = "bloodMark" value="1" /><br>
+Yes<input type = "radio" name = "bloodMark" value="1"/><br>
 No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 
 <h3>Tumor Markers</h3>
@@ -248,7 +248,7 @@ No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 		}
 		else if(celltype == 'limited')
 			{
-				if(bmarker == 'null')
+				if(bmarker == '0')
 					{
 					window.alert('Please provide blood testings for Small Cell Lung Cancer');
 					}
