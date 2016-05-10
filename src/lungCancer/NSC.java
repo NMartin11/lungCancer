@@ -18,6 +18,16 @@ public class NSC extends CoeffecientPrep{
 	 *  
 	 */
 
+    private ArrayList<String> treatments = new ArrayList<String>();
+
+    public ArrayList<String> makeMultipleLists(List<Object> list)
+    {
+        //TODO: Find different treatments in object list
+        //TODO: Seperate lists into array
+
+        return treatments;
+    }
+
 	public String runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----

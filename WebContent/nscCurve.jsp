@@ -16,11 +16,12 @@
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
-	
+
 <%
-//Uses java function from NSC.java/connection.java to calculate curve results
+    //Uses java function from NSC.java/connection.java to calculate curve results
 	NSC nsc = new NSC();
-	String results = nsc.runNSC(request,response);
+    ArrayList<String> results = new ArrayList<String>();
+    results.add(nsc.runNSC(request,response));
 %>
 
 <%@ include file="plotCurve.jspf" %>

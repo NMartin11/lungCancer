@@ -3,12 +3,19 @@
     $(function() {
 
         //var survivalRate = [] pass string from java to JSon
-
+        var r = <%= results %>;
+        window.alert(r[0]);
+        window.alert(r[1]);
         var datasets = {
-            "Model": {
+            "Model":
+            {
                 label: "Model",
-                data: <%= results %>
-
+                data: r[0]
+            },
+            "Model 2":
+            {
+                label: "Model 2",
+                data: r[1]
             }
         };
 
@@ -25,7 +32,7 @@
         var choiceContainer = $("#choices");
         $.each(datasets, function(key, val) {
             choiceContainer.append("<br/><input type='checkbox' name='" + key +
-                    "' checked='checked' id='id" + key + "'></input>" +
+                    "' checked='checked' id='id" + key + "'>" +
                     "<label for='id" + key + "'>"
                     + val.label + "</label>");
         });
