@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,16 +18,6 @@ public class NSC extends CoeffecientPrep{
 	 * runNSC(request,response)--> Gets all parameters and calculates survival rate: returns string
 	 *  
 	 */
-
-    private ArrayList<String> treatments = new ArrayList<String>();
-
-    public ArrayList<String> makeMultipleLists(List<Object> list)
-    {
-        //TODO: Find different treatments in object list
-        //TODO: Seperate lists into array
-
-        return treatments;
-    }
 
 	public String runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
