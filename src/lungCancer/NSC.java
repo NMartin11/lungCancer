@@ -19,7 +19,7 @@ public class NSC extends CoeffecientPrep{
 	 *  
 	 */
 
-	public String runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public ArrayList<String> runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -32,15 +32,15 @@ public class NSC extends CoeffecientPrep{
 		prep.setCoefficients(request, response);
 
 		List<Object> list = prep.getCoefficients();
-		double sum = calcSum(list, prep.getModel());
-		String results = prep.calculate(sum);
+        list = prep.removeTreatments(list);
+        prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
+		prep.calculate(prep.sumList);
 
 
-		return results;
+		return resultList;
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -21,7 +21,7 @@
     //Uses java function from NSC.java/connection.java to calculate curve results
 	NSC nsc = new NSC();
     ArrayList<String> results = new ArrayList<String>();
-    results.add(nsc.runNSC(request,response));
+    results = nsc.runNSC(request,response);
 %>
 
 <%@ include file="plotCurve.jspf" %>

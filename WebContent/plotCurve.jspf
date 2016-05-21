@@ -6,6 +6,7 @@
         var r = <%= results %>;
         window.alert(r[0]);
         window.alert(r[1]);
+       //TODO: get results from list to display curve
         var datasets = {
             "Model":
             {

@@ -20,7 +20,7 @@ public class MyLists extends CoeffecientPrep {
             "chemoradiation","surgradiationchemo","neoadjuvent","othertrt"};
 
     public ArrayList<String> usedTreatments = new ArrayList<>();
-    public List<Object> multipleLists = new ArrayList<>();
+    public List<List<Object>> multipleLists = new ArrayList<>();
 
     //Removes all treatments selected by user
     public List<Object> removeTreatments(List<Object> list)
@@ -39,7 +39,7 @@ public class MyLists extends CoeffecientPrep {
     }
 
     //Split into lists each with there own treatment
-    public List<Object> MultipleTreatmentList(List<Object> list)
+    public List<List<Object>> MultipleTreatmentList(List<Object> list)
     {
         for(int i = 0; i < usedTreatments.size(); i++)
         {
@@ -49,6 +49,26 @@ public class MyLists extends CoeffecientPrep {
             multipleLists.add(i, temp);
         }
         return multipleLists;
+    }
+
+    List<String> sumList = new ArrayList<>();
+    public List<String> findSum(List<List<Object>> multiList)
+    {
+        String str = "";
+        double val, val2;
+        double sum = 0;
+
+        for(int i = 0; i < multiList.size(); i++)
+        {
+            //TODO: get sum for each index in s and add to sumList arrayList
+            Object[] temp = multiList.get(i).toArray();
+            str = temp[i].toString();
+            i++;
+
+        }
+
+
+        return sumList;
     }
 
 
@@ -75,8 +95,10 @@ public class MyLists extends CoeffecientPrep {
         coeffList.add("radiation");
         coeffList.add(1.0);
 
-        coeffList = mylist.removeTreatments(coeffList);
-        mylist.MultipleTreatmentList(coeffList);
+        List<List<Object>> multiList = new ArrayList<>();
+        mylist.removeTreatments(coeffList);
+        multiList = mylist.MultipleTreatmentList(coeffList);
+        mylist.findSum(multiList);
 
     }
 

@@ -43,7 +43,6 @@ public class Extensive extends CoeffecientPrep {
 		List<Object> list = prep.getCoefficients();
 		
 		System.out.println("Check List values " + list);
-		//TODO: Get red cell distribution, nRatio, pRatio,ps, hbx,num_metas_over
 		int index;
 	
 		index = list.indexOf("lymphocyte");
