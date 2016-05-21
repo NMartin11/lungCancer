@@ -12,24 +12,28 @@
 </head>
 <body>
 
+<h3>Prophylactic Cranial Irradiation:</h3>
+	Yes<input type = "radio" name = "pci" value = "1" required = "required" />
+	No<input type = "radio" name = "pci" value = "0" /><br><br>
+
 <!-- put all variables from limited and extended small cell on this page -->
 
 <form action = "extensiveCurve.jsp" method = "post">
 
-	<h3>Red Cell Distribution Width (Reference rage: 11-15%)</h3>
-	<input type = "number" name = "ln_rdw" placeholder = "rdw"/>
+	<h3>Red Cell Distribution Width (%)</h3>
+	<input id = "ln_rdw" type = "number" step="1" name = "ln_rdw" step="0.1" placeholder = "11 to 16"/>
 
-	<h3>Lymphocyte (Reference range: 1300-3500 counts per L)</h3>
-	<input type = "number" name = "lymphocyte" min = "0" />
+	<h3>Lymphocyte (10^9 cells/L)</h3>
+	<input type = "number" name = "lymphocyte" min = "0" step="0.01" placeholder = "0.9 to 2.9"/>
+	
+	<h3>Neutrophil (10^9 cells/L)</h3>
+	<input type = "number" name = "neutrophil" min = "0" step="0.01" placeholder = "1.7 to 7.0"/><br>
 
-	<h3>Neutrophil (Reference range: 2000-7500 counts per L)</h3>
-	<input type = "number" name = "neutrophil" min = "0" /><br>
+	<h3>Platelet (10^9 cells/L)</h3>
+	<input type = "number" name = "platelet" min = "0" placeholder = "150 to 450" /><br>
 
-	<h3>Platelet (Reference range: 140-450 counts per L)</h3>
-	<input type = "number" name = "platelet" min = "0" /><br>
-
-	<h3>Hemoglobin (Reference range: 120-180g per L)</h3>
-	<input type = "number" name = "hbx" min = "0" />
+	<h3>Hemoglobin (g/dL)</h3>
+	<input type = "number" name = "hbx" min = "0" step="0.1" placeholder = "12.0 to 17.5"/>
 	
 	<h3>ECOG Performance Score:</h3>
 			<select name = "ps">

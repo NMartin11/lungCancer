@@ -35,7 +35,7 @@ Former Smoker:  <input type = "checkbox" name = "smkformer" value = "1"/><br>
 Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 
 <h3>Cell Type</h3>
-<select id = "celltype" name = "celltype">
+<select id = "celltype" name = "celltype" onchange="changeTreatment()">
 	<option value="adeno" >Adenocarcinoma</option>
 	<option value="squamous">Squamous Cell Carcinoma</option>
 	<option value="largecell" >Large Cell Carcinoma</option>
@@ -45,57 +45,14 @@ Never Smoked:	<input type = "checkbox" name = "smkcurrent" value = "0"/><br>
 	<option value="extensive" >Extensive-stage Small Cell Carcinoma</option>
 	<option value= "other"  >Other NSCLC</option>
 </select>
-<script type="text/javascript">
-
-function change()
-{
-	var type = document.getElementById("celltype");
-	var valtype = type.options[type.selectedIndex].value;
-	
-		if(valtype == "extensive") {
-			document.getElementById("treatment").options[1].disabled = true;
-			document.getElementById("treatment").options[4].disabled = true;
-			document.getElementById("treatment").options[5].disabled = true;
-			document.getElementById("treatment").options[7].disabled = true;
-			document.getElementById("treatment").options[8].disabled = true;
-		} else if(valtype == "limited") {
-			document.getElementById("treatment").options[5].disabled = true;
-			document.getElementById("treatment").options[7].disabled = true;
-			document.getElementById("treatment").options[8].disabled = true;
-		} else if(document.getElementById("reported_y").checked) {
-			document.getElementById("treatment").options[8].disabled = true;
-		} else if(document.getElementById("recurrence_y").checked) {
-			document.getElementById("treatment").options[2].disabled = true;
-			document.getElementById("treatment").options[3].disabled = true;
-			document.getElementById("treatment").options[6].disabled = true;
-			document.getElementById("treatment").options[8].disabled = true;
-			document.getElementById("treatment").options[9].disabled = true;
-
-		} else {
-			document.getElementById("treatment").options[0].disabled = false;
-			document.getElementById("treatment").options[1].disabled = false;
-			document.getElementById("treatment").options[2].disabled = false;
-			document.getElementById("treatment").options[3].disabled = false;
-			document.getElementById("treatment").options[4].disabled = false;
-			document.getElementById("treatment").options[5].disabled = false;
-			document.getElementById("treatment").options[6].disabled = false;
-			document.getElementById("treatment").options[7].disabled = false;
-			document.getElementById("treatment").options[8].disabled = false;
-			document.getElementById("treatment").options[9].disabled = false;
-		}
-}
-
-</script>
 
 <h3>Stage</h3>
-<!-- TODO: iif stageia and stageib == stagei -->
-<!-- TODO: iif stageiib and stageib == stageii -->
 <select id = "stage" name = "stage">
 	<option value="stageia" selected="selected" >Stage IA</option>
 	<option value="stageib" >Stage IB</option>
 	<option value="stageiia" >Stage IIA</option>
 	<option value="stageiib" >Stage IIB</option>
-	<option value="stageiia" >Stage IIIA</option>
+	<option value="stageiiia" >Stage IIIA</option>
 	<option value="stageiiib" >Stage IIIB</option>
 	<option value="stageiv" >Stage IV</option>
 </select>
@@ -105,9 +62,23 @@ Well 		<input type = "checkbox" name = "gradewell" value = "1"/><br>
 Moderate 	<input type = "checkbox" name = "grademoderate" value = "1"/><br>
 Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 
+
+<h3>Is Self Reported Symptoms Available?</h3><br>
+	Yes<input type = "radio" name = "reported" value = "1" onclick="changeCellStage();"/>
+	No <input type = "radio" name = "reported" value = "0" checked = "checked"/>
+
+<h3>Is Blood Testing Available for Small Cell?</h3>
+Yes<input type = "radio" name = "bloodMark" value="1" /><br>
+No<input type = "radio" name = "bloodMark" value="0" checked/><br>
+
+
+<h3>Is There Post-surgery Recurrence?</h3>
+Yes <input type = "radio" name = "recurrence" value = "1" onclick="changeTreatment()"/>
+No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
+
 <h3>Treatment to Date</h3>
 
-<select id = "treatment" name = "treatment" size="5" multiple="multiple" onclick="change();">
+<select id = "treatment" name = "treatment" size="5" onchange="changeTreatment()" multiple="multiple">
 	<option value="background" selected = "selected">--Please Pick Treatment--</option>
 	<option value="surgery">Surgery Only</option>
 	<option value="chemo">Chemotherapy Only</option>
@@ -120,43 +91,107 @@ Poor		<input type = "checkbox" name = "gradepoor" value = "1"/><br>
 	<option value="othertrt">None/Other</option>
 </select>
 
-<h3>Self Reported Symptoms</h3><br>
-	Yes<input type = "radio" id="reported_y" name = "reported" value = "1"/>
-	No <input type = "radio" name = "reported" value = "0" checked = "checked"/>
 
-
-<h3>Recurrence</h3>
-Yes <input type = "radio" id="recurrence_y" name = "recurrence" value = "1" onclick="changeCelltype();"/>
-No <input type = "radio" name = "recurrence" value = "0" checked = "checked"/>
 <script type="text/javascript">
-	function changeCelltype()
+
+function changeTreatment()
+{
+	var type = document.getElementById("celltype");
+	var valtype = type.options[type.selectedIndex].value;
+	
+	var recurrence = $("input[name=recurrence]:checked").val();
+	var reported = $("input[name=reported]:checked").val();
+
+	document.getElementById("treatment").options[0].disabled = false;
+	document.getElementById("treatment").options[1].disabled = false;
+	document.getElementById("treatment").options[2].disabled = false;
+	document.getElementById("treatment").options[3].disabled = false;
+	document.getElementById("treatment").options[4].disabled = false;
+	document.getElementById("treatment").options[5].disabled = false;
+	document.getElementById("treatment").options[6].disabled = false;
+	document.getElementById("treatment").options[7].disabled = false;
+	document.getElementById("treatment").options[8].disabled = false;
+	document.getElementById("treatment").options[9].disabled = false;
+	
+	if (recurrence == "1")
 	{
-		var recurrence = $("input[name=recurrence]:checked").val();
+		document.getElementById("treatment").options[0].disabled = true;
+		document.getElementById("treatment").options[1].disabled = false;
+		document.getElementById("treatment").options[2].disabled = true;
+		document.getElementById("treatment").options[3].disabled = true;
+		document.getElementById("treatment").options[4].disabled = false;
+		document.getElementById("treatment").options[5].disabled = false;
+		document.getElementById("treatment").options[6].disabled = true;
+		document.getElementById("treatment").options[7].disabled = false;
+		document.getElementById("treatment").options[8].disabled = true;
+		document.getElementById("treatment").options[9].disabled = true;
+	}
+	else if(valtype == "extensive" && reported == "0")
+	{
+		document.getElementById("treatment").options[0].disabled = true;
+		document.getElementById("treatment").options[1].disabled = true;
+		document.getElementById("treatment").options[2].disabled = false;
+		document.getElementById("treatment").options[3].disabled = true;
+		document.getElementById("treatment").options[4].disabled = true;
+		document.getElementById("treatment").options[5].disabled = true;
+		document.getElementById("treatment").options[6].disabled = false;
+		document.getElementById("treatment").options[7].disabled = true;
+		document.getElementById("treatment").options[8].disabled = true;
+		document.getElementById("treatment").options[9].disabled = false;
+	}
+	else if(valtype == 'limited' && reported == "0")
+	{
+		document.getElementById("treatment").options[0].disabled = true;
+		document.getElementById("treatment").options[1].disabled = true;
+		document.getElementById("treatment").options[2].disabled = false;
+		document.getElementById("treatment").options[3].disabled = true;
+		document.getElementById("treatment").options[4].disabled = false;
+		document.getElementById("treatment").options[5].disabled = true;
+		document.getElementById("treatment").options[6].disabled = false;
+		document.getElementById("treatment").options[7].disabled = true;
+		document.getElementById("treatment").options[8].disabled = true;
+		document.getElementById("treatment").options[9].disabled = false;
+	}
+
+}
+</script>
+
+<script type="text/javascript">
+//Note: The changeCellStage() is only for the QoL model, it SHOULD be placed in the qol.jsp
+//It combiness stageia & stageib to stagei ... and combines limted & extensive to smallcell
+	function changeCellStage()
+	{
+		
 		var celltype;
 		var type = document.getElementById("celltype");
 		for(var i = 0; i < type.length; i++)
 		{
-			if(type[i].selected)
+			if(type[i].selected && (type[i].value=="limited" || type[i].value=="extensive") )
 			{
-				celltype = type[i].value;
+				type[i].value = "smallcell";
 			}
 		}
-		if(recurrence == '1' && (celltype == 'limited' || celltype == 'extensive'))
+		
+		var stage;
+		var stage = document.getElementById("stage");
+		for(var i = 0; i < type.length; i++)
 		{
-			document.getElementById("celltype").value = 'smallcell';
-			//window.alert('changed celltype to small cell');
-		}
-			else
+			if(stage[i].selected && (stage[i].value=="stageia" || stage[i].value=="stageib") )
 			{
-				//window.alert('did not do a thing');
+				stage[i].value = "stagei";
 			}
+			else if(stage[i].selected && (stage[i].value=="stageiia" || stage[i].value=="stageiib") )
+			{
+				stage[i].value = "stageii";
+			}
+			else if(stage[i].selected && (stage[i].value=="stageiiia" || stage[i].value=="stageiiib") )
+			{
+				stage[i].value = "stageiii";
+			}
+		}
 	}
 
 </script>
-
-<h3>Blood Marker</h3>
-Yes<input type = "radio" name = "bloodMark" value="1"/><br>
-No<input type = "radio" name = "bloodMark" value="0" checked/><br>
 
 <h3>Tumor Markers</h3>
 	<select name = "tumor">
