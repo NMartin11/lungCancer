@@ -23,7 +23,7 @@ public class Extensive extends CoeffecientPrep {
 
 	
 	
-	public String runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<String> runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -97,13 +97,12 @@ public class Extensive extends CoeffecientPrep {
 		{
 			System.out.println("Params Used: " + list.get(i));
 		}
-		
-		double sum = calcSum(list,prep.getModel());
-		
-		String results = prep.calculate(sum);
-		
-		System.out.println("Results: " + results);
-		return results;
+
+        list = prep.removeTreatments(list);
+        prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
+        prep.calculate(prep.sumList);
+
+		return resultList;
 	}
 	
 		

@@ -4,7 +4,6 @@ package lungCancer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -86,7 +85,7 @@ public class qolCurve extends CoeffecientPrep{
 		return listNames;
 	}
 	
-	public String runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<String> runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
 		
 		/*-----Variables needed---------
@@ -122,10 +121,11 @@ public class qolCurve extends CoeffecientPrep{
 		list.remove(index + 1);
 		list.add(index + 1,comorbVal(dyspnea));
 
-		double sum = prep.calcSum(list, prep.getModel());
-		String results = prep.calculate(sum);
-		System.out.println("Results: " + results);
-		return results;
+        list = prep.removeTreatments(list);
+        prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
+        prep.calculate(prep.sumList);
+
+		return resultList;
 	}
 
 	public double comorbVal(double score)

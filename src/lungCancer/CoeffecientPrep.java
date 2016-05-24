@@ -202,12 +202,11 @@ public class CoeffecientPrep extends HttpServlet{
 		}
 		return model;
 	}
-	
-	//Takes ArrayList with parameters and HashMap which holds the model for calculations
-    //TODO: Change return value to list with multiple results
-    //TODO: Change parameter to be array of sums
+
+    /* Takes the list of sums on puts them into equation to calculate survival rate
+     Will return a number of results based on how many treatments were selected*/
 	public List<String> calculate(List<Double> sumList)
-	    {
+    {
             for(Double sum : sumList)
             {
                 String results = "[";
@@ -238,30 +237,33 @@ public class CoeffecientPrep extends HttpServlet{
 	        return resultList;
 	    }
 
-    //TODO: Change return value to array of sums for calculate method
+   /*
+    * Takes List p which may have mulitple list based on how many treatments were picked
+    * If two treatments were picked then there will be two list each using one treatment
+    */
 	public List<Double> calcSum(List<List<Object>> p, HashMap<String, Double> m)
 	    {
-
 	        String str = "";
 	        double val,val2;
 	        double sum = 0;
+
+            //For each list in p
             for(List<Object> temp: p)
             {
                 //adds coefficient values being used
-                for(int i = 0; i < p.size(); i++)
+                for(int i = 0; i < temp.size(); i++)
                 {
                     str = temp.get(i).toString();
                     i++;
                     if(m.containsKey(str) && !m.get(str).isNaN())
                     {
                         val = m.get(str);
-                        val2 = Double.parseDouble(p.get(i).toString());
+                        val2 = Double.parseDouble(temp.get(i).toString());
                         System.out.println("val = " + val + " " + "val2 = " + val2);
                         sum += val * val2;
-                        sumList.add(sum);
                     }
                 }
-
+                sumList.add(sum);
             }
 
 	        System.out.println("Sum = " + sum);
@@ -310,7 +312,12 @@ public class CoeffecientPrep extends HttpServlet{
 	    }
 	    return containsDigit;
 	}
-	
+
+    public ArrayList<String> getUsedTreatements()
+    {
+        return usedTreatments;
+    }
+
 	public static void main(String[] args) {
 
 

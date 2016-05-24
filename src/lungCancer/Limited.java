@@ -18,7 +18,7 @@ public class Limited extends CoeffecientPrep{
 	 * 
 	 */
 	
-	public String runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<String> runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
 		CoeffecientPrep prep = new CoeffecientPrep();
@@ -71,20 +71,13 @@ public class Limited extends CoeffecientPrep{
 		ln_rdw = redCellDistribution(ln_rdw);
 		list.remove(index + 1);
 		list.add(index + 1, ln_rdw);
-				
-		
-		//Test to see values in list
-		for(int i = 0; i < list.size(); i++)
-		{
-			System.out.println("Params Used: " + list.get(i));
-		}
-		
-		double sum = calcSum(list,prep.getModel());
-		
-		String results = prep.calculate(sum);
-		
-		System.out.println("Results: " + results);
-		return results;
+
+
+        list = prep.removeTreatments(list);
+        prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
+        prep.calculate(prep.sumList);
+
+		return resultList;
 	}
 	
 	//calculates natural log of the ratio of neutrophil and lymphocyte

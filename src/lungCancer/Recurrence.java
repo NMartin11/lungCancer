@@ -2,8 +2,6 @@ package lungCancer;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,7 +20,7 @@ public class Recurrence extends CoeffecientPrep {
 	 */
 	
 	
-	public String runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<String> runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -43,10 +41,12 @@ public class Recurrence extends CoeffecientPrep {
 		list.add(group);
 		list.add(1);
 		System.out.println("Values in list array =" + list);
-		
-		double sum = prep.calcSum(list, prep.getModel());
-		String results = prep.calculate(sum);
-		return results;
+
+        list = prep.removeTreatments(list);
+        prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
+        prep.calculate(prep.sumList);
+
+        return resultList;
 	}
 	
 	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

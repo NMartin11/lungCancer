@@ -9,6 +9,8 @@
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
+    <%@ page import="org.json.simple.JSONObject" %>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
@@ -20,8 +22,10 @@
 <%
     //Uses java function from NSC.java/connection.java to calculate curve results
 	NSC nsc = new NSC();
-    ArrayList<String> results = new ArrayList<String>();
-    results.add(nsc.runNSC(request,response));
+    JSONObject resultList = new JSONObject();
+    ArrayList<String> treatmentNames = new ArrayList<String>();
+    resultList = nsc.runNSC(request,response);
+    System.out.println(resultList);
 %>
 
 <%@ include file="plotCurve.jspf" %>

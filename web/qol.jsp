@@ -29,8 +29,8 @@
 	<select name = "comorb">
 		<option disabled selected> -- select an option -- </option>
 		<option value = "1"> Cocancer </option> 
-		<option value = "1"> Co lung cancer </option>
-		<option value = "1"> Co other Diseases </option>
+		<option value = "1"> Co lung diseases </option>
+		<option value = "1"> Co other diseases </option>
 	</select>
 </h3>
 <p>Enter the symptoms. Rate 0 - 10.(0-best, 10-worst)</p>

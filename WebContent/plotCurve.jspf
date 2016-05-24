@@ -1,23 +1,66 @@
 <script type="text/javascript">
 
     $(function() {
-
+        //TODO: resultList isn't passing correctly
+        var r = <%=resultList%>;
         //var survivalRate = [] pass string from java to JSon
-        var r = <%= results %>;
-        window.alert(r[0]);
-        window.alert(r[1]);
+
+        //TODO: write loop to put results into r
+        window.alert(r);
+
        //TODO: get results from list to display curve
         var datasets = {
             "Model":
             {
-                label: "Model",
+                label: "Model 1",
                 data: r[0]
             },
             "Model 2":
             {
-                label: "Model 2",
+                label: "Model 1",
                 data: r[1]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[2]
+            },
+            "Model":
+            {
+                label:"Model 1",
+                data: r[3]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[4]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[5]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[6]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[7]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[8]
+            },
+            "Model":
+            {
+                label: "Model 1",
+                data: r[9]
             }
+
         };
 
         // hard-code color indices to prevent them from shifting as

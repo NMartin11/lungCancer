@@ -8,6 +8,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="lungCancer" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+        </element>
       </element>
       <element id="javaee-facet-resources" facet="lungCancer/web/Web" />
     </root>
