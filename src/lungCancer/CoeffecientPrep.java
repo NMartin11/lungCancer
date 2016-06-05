@@ -20,14 +20,14 @@ public class CoeffecientPrep extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private List<Object> modelCoeff;
-	private List<Double> baseline = new ArrayList<>();
-	private HashMap<String,Double> model = new HashMap<>();
+	private List<Double> baseline = new ArrayList<Double>();
+	private HashMap<String,Double> model = new HashMap<String,Double>();
 	public String[] treatments;
     private final String[] treatmentLists = {"background","surgery","chemo","radiation","surgchemo","surgradiation", "chemoradiation","surgradiationchemo","neoadjuvent","othertrt"};
-    public ArrayList<String> usedTreatments = new ArrayList<>();
-    public List<List<Object>> multipleLists = new ArrayList<>();
-    public List<Double> sumList = new ArrayList<>();
-    public List<String> resultList = new ArrayList<>();
+    public ArrayList<String> usedTreatments = new ArrayList<String>();
+    public List<List<Object>> multipleLists = new ArrayList<List<Object>>();
+    public List<Double> sumList = new ArrayList<Double>();
+    public List<String> resultList = new ArrayList<String>();
 
 	
 	
@@ -37,7 +37,7 @@ public class CoeffecientPrep extends HttpServlet{
 	public void setCoefficients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
 		//Makes session for age, gender, treatment for later use
-		ArrayList<Object> testList = new ArrayList<>();
+		ArrayList<Object> testList = new ArrayList<Object>();
 
 		Enumeration paramNames = request.getParameterNames();
 		while(paramNames.hasMoreElements())
@@ -72,7 +72,7 @@ public class CoeffecientPrep extends HttpServlet{
 	public void createListSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		//Makes session for age, gender, treatment for later use
-		ArrayList<Object> testList = new ArrayList<>();
+		ArrayList<Object> testList = new ArrayList<Object>();
 
 		Enumeration paramNames = request.getParameterNames();
 		while(paramNames.hasMoreElements())
@@ -291,7 +291,7 @@ public class CoeffecientPrep extends HttpServlet{
     {
         for(int i = 0; i < usedTreatments.size(); i++)
         {
-            List<Object> temp = new ArrayList<>(list);
+            List<Object> temp = new ArrayList<Object>(list);
             temp.add(usedTreatments.get(i));
             temp.add(1.0);
             multipleLists.add(i, temp);

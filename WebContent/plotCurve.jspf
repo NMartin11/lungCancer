@@ -1,14 +1,8 @@
 <script type="text/javascript">
 
     $(function() {
-        //TODO: resultList isn't passing correctly
-        var r = <%=resultList%>;
-        //var survivalRate = [] pass string from java to JSon
-
-        //TODO: write loop to put results into r
-        window.alert(r);
-
-       //TODO: get results from list to display curve
+     var r = JSON.parse(<%=resultList%>)
+        //TODO: get results from list to display curve
         var datasets = {
             "Model":
             {
