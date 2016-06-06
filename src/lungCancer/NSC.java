@@ -47,7 +47,7 @@ public class NSC extends CoeffecientPrep{
         //TODO: try json array in same format as var dataset from js page
         for(int i = 0; i < treatments.size(); i++)
         {
-            finalResults.put(treatments.get(i),"label:" + treatments.get(i) + "," + "data:" + resultList.get(i));
+            finalResults.put(treatments.get(i),"[label:" + treatments.get(i) + "," + "data:" + resultList.get(i) + "}");
         }
 	}
 

@@ -1,24 +1,17 @@
-/**
- * Created by NMartin11 on 5/24/2016.
- */
 
-    function showGraph(r) {
-    //Not displaying alert window, which means it may not be calling this function
-    var data = JSON.parse(r);
-    window.alert("hello i'm here");
-
-    // hard-code color indices to prevent them from shifting as
-    // countries are turned on/off
-
+function showGraph(x){
+    alert("in this javascript file");
+    var datasets = x;
+    alert(datasets);
     var i = 0;
-    $.each(data, function(key, val) {
+    $.each(datasets, function(key, val) {
         val.color = i;
         ++i;
     });
 
     // insert checkboxes
     var choiceContainer = $("#choices");
-        $.each(data, function(key, val) {
+        $.each(datasets, function(key, val) {
             choiceContainer.append("<br/><input type='checkbox' name='" + key +
                     "' checked='checked' id='id" + key + "'>" +
     "<label for='id" + key + "'>"
@@ -33,8 +26,8 @@
 
         choiceContainer.find("input:checked").each(function () {
         var key = $(this).attr("name");
-        if (key && data[key]) {
-        data.push(data[key]);
+        if (key && datasets[key]) {
+        data.push(datasets[key]);
     }
     });
 
@@ -166,5 +159,5 @@
     // Add the Flot version string to the footer
 
     $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
-    };
+    }
 
