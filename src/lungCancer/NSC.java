@@ -1,6 +1,6 @@
 package lungCancer;
 
-import org.json.simple.*;
+import org.json.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class NSC extends CoeffecientPrep{
 	 */
     JSONObject finalResults = new JSONObject();
 
-	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -62,14 +62,19 @@ public class NSC extends CoeffecientPrep{
         treatments.add("radiation");
         treatments.add("surgery");
         JSONObject obj = new JSONObject();
-        JSONObject JSobj = new JSONObject();
+        
         for(String treat: treatments)
         {
-            obj.put(treat,"[{0,0.998},{0,0.997},{0,0.996},{0,0.990}]");
+            try {
+				obj.put(treat,"[{0,0.998},{0,0.997},{0,0.996},{0,0.990}]");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
         String jsonObject = obj.toString();
-        String string = obj.toJSONString();
+        String string = obj.toString();
 
         System.out.println(obj);
 	}

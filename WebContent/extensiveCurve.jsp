@@ -5,6 +5,7 @@
 <html>
 <head>
 	<%@ page import="lungCancer.CoeffecientPrep" %>
+	<%@ page import="org.json.*" %>
 	<%@ page import="lungCancer.Extensive" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.List" %>
@@ -20,7 +21,8 @@
 	
 <%
 	Extensive exten = new Extensive();
-	String results = exten.runExtensive(request, response);
+	JSONObject results = new JSONObject();
+	results = exten.runExtensive(request, response);
 %>
 <%@ include file="plotCurve.jspf" %>
 
