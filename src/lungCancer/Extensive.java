@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 public class Extensive extends CoeffecientPrep {
 
 	/*------Methods----
@@ -23,7 +25,7 @@ public class Extensive extends CoeffecientPrep {
 
 	
 	
-	public List<String> runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public JSONObject runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -102,7 +104,7 @@ public class Extensive extends CoeffecientPrep {
         prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
         prep.calculate(prep.sumList);
 
-		return resultList;
+		return null;
 	}
 	
 		

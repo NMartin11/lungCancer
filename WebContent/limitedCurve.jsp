@@ -8,6 +8,7 @@
 	<%@ page import="lungCancer.Limited" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
+	<%@ page import = "java.util.List" %>
 	<%@ page import = "java.util.Enumeration" %>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Limited Small-cell</title>
@@ -21,7 +22,8 @@
 //Uses java function from Limited.java/connection.java to calculate curve results
 
 Limited limit = new Limited();
-String results = limit.runLimited(request, response);
+List<String> results = new ArrayList<String>();
+results = limit.runLimited(request, response);
 %>
 <%@ include file="plotCurve.jspf" %>
 

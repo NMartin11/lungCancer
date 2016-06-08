@@ -6,6 +6,7 @@
 <head>
 	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import="lungCancer.Recurrence" %>
+	<%@ page import = "java.util.List" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = "java.util.Enumeration" %>
@@ -20,7 +21,7 @@
 <%
 //Calculates the results of the recurrence curve
 Recurrence recur = new Recurrence();
-String results = recur.runRecurrence(request, response);
+List<String> results = recur.runRecurrence(request, response);
 %>
 	<%@ include file="plotCurve.jspf" %>
 	

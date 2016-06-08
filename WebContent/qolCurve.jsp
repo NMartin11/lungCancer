@@ -8,6 +8,7 @@
 	<%@ page import="lungCancer.qolCurve" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
+	<%@ page import = "java.util.List" %>
 	<%@ page import = "java.util.Enumeration" %>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -19,7 +20,7 @@
 	
 <%
 	qolCurve qol = new qolCurve();
-	String results = qol.runQOL(request, response);
+	List<String> results = qol.runQOL(request, response);
 %>
 	<%@ include file="plotCurve.jspf" %>
 </head>

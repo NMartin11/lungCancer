@@ -9,8 +9,7 @@
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
-    <%@ page import="org.json.simple.JSONObject" %>
-    <%@ page import="org.json.simple.JSONArray" %>
+    <%@ page import="org.json.*" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -29,7 +28,7 @@
     List<String> treatments = new ArrayList<>();
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
-    String temp = resultList.toJSONString();
+    String temp = resultList.toString();
     System.out.println(temp);
     System.out.println(temp.getClass());
 

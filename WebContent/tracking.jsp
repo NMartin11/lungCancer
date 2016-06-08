@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<%@ page import="lungCancer.connection" %>
+	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = " java.lang.Object" %>
