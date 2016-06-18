@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -9,8 +11,7 @@
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
-    <%@ page import="org.json.simple.JSONObject" %>
-    <%@ page import="org.json.simple.JSONArray" %>
+    <%@ page import="org.json.*" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -29,9 +30,7 @@
     List<String> treatments = new ArrayList<>();
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
-    String temp = resultList.toJSONString();
-    System.out.println(temp);
-    System.out.println(temp.getClass());
+
 
     //TODO: make JSON object a JSON string that replicates dataset object from flots javascript
 
@@ -40,7 +39,6 @@
 <script type="text/javascript">
     window.onload = function() {
         var x = <%=resultList%>;
-//        window.alert(x['surgery']);
 //        window.alert(x['chemo']);
 //        window.alert(x['radiation']);
         showGraph(x);

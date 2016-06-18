@@ -1,6 +1,7 @@
 package lungCancer;
 
-import org.json.simple.*;
+import net.sf.json.util.JSONBuilder;
+import org.json.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,9 @@ public class NSC extends CoeffecientPrep{
 	 *  
 	 */
     JSONObject finalResults = new JSONObject();
-
-	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
+    JSONArray finalArray = new JSONArray();
+    String str;
+	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException {
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
 		 *treatment	agedx		stage
@@ -45,33 +46,27 @@ public class NSC extends CoeffecientPrep{
         List<String> treatments = new ArrayList<>();
         treatments = prep.usedTreatments;
         //TODO: try json array in same format as var dataset from js page
-        for(int i = 0; i < treatments.size(); i++)
-        {
-            finalResults.put(treatments.get(i),"[label:" + treatments.get(i) + "," + "data:" + resultList.get(i) + "}");
+        for(int i = 0; i < treatments.size(); i++) {
+            finalResults.put(treatments.get(i),"{label:"+treatments.get(i) + ",data:"+resultList.get(i) + "}");
         }
-	}
+
+        /*
+            "Model":
+            {
+                label: "Model 1",
+                data: r[0]
+            },
+         */
+    }
 
     public JSONObject getFinalResults()
     {
         return this.finalResults;
     }
+
 	
 	public static void main(String[] args) {
-        List<String> treatments = new ArrayList<>();
-        treatments.add("chemo");
-        treatments.add("radiation");
-        treatments.add("surgery");
-        JSONObject obj = new JSONObject();
-        JSONObject JSobj = new JSONObject();
-        for(String treat: treatments)
-        {
-            obj.put(treat,"[{0,0.998},{0,0.997},{0,0.996},{0,0.990}]");
-        }
 
-        String jsonObject = obj.toString();
-        String string = obj.toJSONString();
-
-        System.out.println(obj);
 	}
 
 }

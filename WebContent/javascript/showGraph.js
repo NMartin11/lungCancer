@@ -2,7 +2,7 @@
 function showGraph(x){
     alert("in this javascript file");
     var datasets = x;
-    alert(datasets);
+    window.alert(datasets);
     var i = 0;
     $.each(datasets, function(key, val) {
         val.color = i;
