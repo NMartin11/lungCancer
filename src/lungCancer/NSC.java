@@ -2,6 +2,7 @@ package lungCancer;
 
 
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.io.IOException;
 import java.util.List;
@@ -18,13 +19,17 @@ public class NSC extends CoeffecientPrep{
 	 *  
 	 */
 
-	public JSONObject runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    JSONArray finalResults = new JSONArray();
+    //TODO: change runNSC to normal method
+    //TODO: create servlet method that returns json object
+
+	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
-		 *treatment	agedx		stage	
+		 *treatment	agedx		stage
 		*/
-		
+
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("background");
 		prep.setBaseline();
@@ -40,16 +45,22 @@ public class NSC extends CoeffecientPrep{
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
         resultList = prep.calculate(prep.sumList);
 
-//      Creates JSON Object and sets the treatment name as the key
-//      and the result list using that treatment
-        JSONObject Robject = new JSONObject();
+/*         Creates JSON Object and sets the treatment name as the key
+*         and the result list using that treatment
+*/
+        //TODO: try json array in same format as var dataset from js page
+
         for(int i = 0; i < prep.usedTreatments.size(); i++)
         {
-            Robject.put(prep.usedTreatments.get(i), resultList.get(i));
+            finalResults.add(prep.usedTreatments.get(i));
+            finalResults.add(resultList.get(i));
         }
-
-		return Robject;
 	}
+
+    public JSONArray getFinalResults()
+    {
+        return this.finalResults;
+    }
 	
 	public static void main(String[] args) {
 

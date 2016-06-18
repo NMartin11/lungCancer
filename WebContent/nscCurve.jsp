@@ -10,6 +10,7 @@
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
     <%@ page import="org.json.simple.JSONObject" %>
+    <%@ page import="org.json.simple.JSONArray" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -18,17 +19,30 @@
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
-
+    <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
 <%
     //Uses java function from NSC.java/connection.java to calculate curve results
-    JSONObject resultList = new JSONObject();
+    JSONArray resultList = new JSONArray();
     NSC nsc = new NSC();
 
     //returns a JSON object to reslutList
-    resultList = nsc.runNSC(request,response);
-%>
+    List<String> treatments = new ArrayList<>();
+    nsc.runNSC(request,response);
+    resultList = nsc.getFinalResults();
+    System.out.println(resultList.toJSONString());
 
-<%@ include file="plotCurve.jspf" %>
+    //TODO: make JSON object a JSON string that replicates dataset object from flots javascript
+
+%>
+<script type="text/javascript">
+   window.onload = function() {
+       var dataset = <%=resultList%>
+       showGraph(dataset);
+   };
+
+
+</script>
+
 </head>
 <body>
 
