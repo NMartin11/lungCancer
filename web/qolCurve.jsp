@@ -9,7 +9,8 @@
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = "java.util.Enumeration" %>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <%@ page import="java.util.List" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
@@ -19,7 +20,7 @@
 	
 <%
 	qolCurve qol = new qolCurve();
-	String results = qol.runQOL(request, response);
+	List<List<double[]>> results = qol.runQOL(request, response);
 %>
 	<%@ include file="plotCurve.jspf" %>
 </head>

@@ -11,7 +11,9 @@
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
-    <%@ page import="org.json.*" %>
+    <%@ page import="org.json.JSONArray" %>
+    <%@ page import="org.json.JSONObject" %>
+
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -21,24 +23,43 @@
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
     <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
+    <script language="javascript" type="text/javascript" src="flot/createGraph.js"></script>
 <%
     //Uses java function from NSC.java/connection.java to calculate curve results
-    JSONObject resultList = new JSONObject();
+    List<List<double[]>> resultList = new ArrayList<>();
+    List<String> treatments = new ArrayList<>();
+    CoeffecientPrep prep = new CoeffecientPrep();
     NSC nsc = new NSC();
 
-    //returns a JSON object to reslutList
-    List<String> treatments = new ArrayList<>();
+    treatments = nsc.getUsedTreatements();
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
+    JSONObject obj2 = new JSONObject();
+    JSONArray arr = new JSONArray();
+//   TODO: make array that follows { label:[treatment name], data: [results] }
+
+    for(int i = 0; i < treatments.size(); i++)
+    {
+        JSONObject obj = new JSONObject();
+
+        obj.put("label", treatments.get(i));
+        obj.put("data", resultList.get(i));
+        obj2.put(treatments.get(i), obj);
+        System.out.println("This is obj2 " + obj2);
+
+    }
 
 
-    //TODO: make JSON object a JSON string that replicates dataset object from flots javascript
+
+
+//   TODO: make object that has treatment name as key and corresponding array as value
+
 
 %>
 
 <script type="text/javascript">
     window.onload = function() {
-        var x = <%=resultList%>;
+        var x = <%=obj2%>;
 //        window.alert(x['chemo']);
 //        window.alert(x['radiation']);
         showGraph(x);

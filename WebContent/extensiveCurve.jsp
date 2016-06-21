@@ -20,7 +20,7 @@
 	
 <%
 	Extensive exten = new Extensive();
-	String results = exten.runExtensive(request, response);
+	List<List<double[]>> results = exten.runExtensive(request, response);
 %>
 <%@ include file="plotCurve.jspf" %>
 

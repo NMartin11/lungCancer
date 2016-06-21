@@ -9,7 +9,8 @@
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = "java.util.Enumeration" %>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <%@ page import="java.util.List" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Limited Small-cell</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
@@ -21,7 +22,7 @@
 //Uses java function from Limited.java/connection.java to calculate curve results
 
 Limited limit = new Limited();
-String results = limit.runLimited(request, response);
+List<List<double[]>> results = limit.runLimited(request, response);
 %>
 <%@ include file="plotCurve.jspf" %>
 

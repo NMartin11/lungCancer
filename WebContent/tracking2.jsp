@@ -121,7 +121,7 @@
 				
 					
 					window.resize = function(event) {
-					    $.plot($("#placeholder"), datasets);    }
+					    $.plot($("#placeholder"), datasets);    };
 					
 					choiceContainer.find("input").click(plotAccordingToChoices);
 				}

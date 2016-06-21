@@ -11,8 +11,8 @@
       <root url="jar://$PROJECT_DIR$/lib/javax.transaction.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar!/" />
       <root url="jar://C:/Program Files/Java/java-json.jar!/" />
-      <root url="jar://C:/Program Files/Java/json-lib-2.4-jdk15.jar!/" />
       <root url="jar://C:/taglibs-standard-impl-1.2.5.jar!/" />
+      <root url="jar://C:/Program Files/Java/json-lib-2.4-jdk15.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

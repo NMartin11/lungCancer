@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
     $(function() {
-     var r = JSON.parse(<%=resultList%>)
+     var r = JSON.parse(<%=resultList%>);
         //TODO: get results from list to display curve
         var datasets = {
             "Model":

@@ -51,7 +51,7 @@ events.
             newpoints = [];
 
             for (i = 0; i < origpoints.length; i += ps) {
-                x = origpoints[i]
+                x = origpoints[i];
                 y = origpoints[i + 1];
 
                 prevp = p;
