@@ -2,8 +2,6 @@ package lungCancer;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,7 +16,7 @@ public class Limited extends CoeffecientPrep{
 	 * 
 	 */
 	
-	public List<String> runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<double[][]> runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
 		CoeffecientPrep prep = new CoeffecientPrep();

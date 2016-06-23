@@ -27,7 +27,7 @@ public class CoeffecientPrep extends HttpServlet{
     public ArrayList<String> usedTreatments = new ArrayList<String>();
     public List<List<Object>> multipleLists = new ArrayList<List<Object>>();
     public List<Double> sumList = new ArrayList<Double>();
-    public List<String> resultList = new ArrayList<String>();
+    public List<double[][]> resultList = new ArrayList<double[][]>();
 
 	
 	
@@ -205,33 +205,27 @@ public class CoeffecientPrep extends HttpServlet{
 
     /* Takes the list of sums on puts them into equation to calculate survival rate
      Will return a number of results based on how many treatments were selected*/
-	public List<String> calculate(List<Double> sumList)
+	public List<double[][]> calculate(List<Double> sumList)
     {
             for(Double sum : sumList)
             {
-                String results = "[";
+                double[][] arr = new double[60][2];
 
-                for(int i = 0; i < 61; i++)	//iterates 60 times --> each time is a month --> total of 5 years
+                for(int i = 0; i < 60; i++)	//iterates 60 times --> each time is a month --> total of 5 years
                 {
                     double answer = 0;
                     answer =  ( Math.exp( -( 1- baseline.get(i)) * Math.exp(sum))); // calculates survival rate --> age multiplied by index value
 
                     //Formats value of answer to 10 decimal places
                     DecimalFormat df = new DecimalFormat("#.##########");
-                    String val = df.format(answer);
+                    double  val = Double.parseDouble(df.format(answer));
 
-                    //Creates a string to pass to javascript in tracking.jsp page
-                    //i being the month and val being survival curve
-                    if(i < 60)
-                    {
-                        results += "[" + i + "," + " " + val + "],";
-                    }
-                    else
-                    {
-                        results += "[" + i + "," + " " + val + "]]";
-                    }
+                    //Create List of double[][] for results
+                    arr[i][0] = i;
+                    arr[i][1] = val;
+                    System.out.println(i);
                 }
-                resultList.add(results);
+                resultList.add(arr);
             }
 
 	        return resultList;

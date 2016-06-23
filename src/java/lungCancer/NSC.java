@@ -38,7 +38,7 @@ public class NSC extends CoeffecientPrep{
 		List<Object> list = prep.getCoefficients();
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        resultList = prep.calculate(prep.sumList);
+       List<double[][]> resultList = prep.calculate(prep.sumList);
 
 /*         Creates JSON Object and sets the treatment name as the key
 *         and the result list using that treatment
@@ -47,16 +47,13 @@ public class NSC extends CoeffecientPrep{
         treatments = prep.usedTreatments;
         //TODO: try json array in same format as var dataset from js page
         for(int i = 0; i < treatments.size(); i++) {
-            finalResults.put(treatments.get(i),"{label:"+treatments.get(i) + ",data:"+resultList.get(i) + "}");
+            JSONObject obj = new JSONObject();
+            obj.put("label", treatments.get(i));
+            obj.put("data", resultList.get(i));
+            finalResults.put(treatments.get(i),obj);
         }
 
-        /*
-            "Model":
-            {
-                label: "Model 1",
-                data: r[0]
-            },
-         */
+
     }
 
     public JSONObject getFinalResults()

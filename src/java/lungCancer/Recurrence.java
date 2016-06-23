@@ -20,7 +20,7 @@ public class Recurrence extends CoeffecientPrep {
 	 */
 	
 	
-	public List<String> runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<double[][]> runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history

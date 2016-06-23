@@ -85,7 +85,7 @@ public class qolCurve extends CoeffecientPrep{
 		return listNames;
 	}
 	
-	public List<String> runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public List<double[][]> runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
 		
 		/*-----Variables needed---------
