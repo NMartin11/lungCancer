@@ -2,14 +2,18 @@ package lungCancer;
 
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Extensive extends CoeffecientPrep {
+
+    JSONObject finalResults = new JSONObject();
 
 	/*------Methods----
 	 * runExtensive(request,response) throws ServletException, IOException
@@ -19,7 +23,7 @@ public class Extensive extends CoeffecientPrep {
 
 	
 	
-	public List<double[][]> runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public void  runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -96,13 +100,12 @@ public class Extensive extends CoeffecientPrep {
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
-	
-		
-	
+
 	
 	//calculates natural log of the ratio of neutrophil and lymphocyte
 	public double nRatio(double neutro, double lympho)
@@ -114,8 +117,6 @@ public class Extensive extends CoeffecientPrep {
 		nRatio = Math.log(n / l);
 		return nRatio;
 	}
-	
-	
 	
 	//calculates natural log of the ratio of platelete and lymphocyte
 	public  double pRatio(double platelete, double lympho)
@@ -138,7 +139,6 @@ public class Extensive extends CoeffecientPrep {
 		return result;
 	}
 
-	
 	
 	public double redCellDistribution(double rdw)
 	{
@@ -182,7 +182,13 @@ public class Extensive extends CoeffecientPrep {
 		return 1;
 	}
 	
-	
+
+//    Getters
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
 	
 	public static void main(String[] args) {
 		

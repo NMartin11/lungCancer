@@ -26,14 +26,8 @@
     JSONObject resultList = new JSONObject();
     NSC nsc = new NSC();
 
-    //returns a JSON object to reslutList
-    List<String> treatments = new ArrayList<>();
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
-
-
-    //TODO: make JSON object a JSON string that replicates dataset object from flots javascript
-
 %>
 
 <script type="text/javascript">

@@ -1,6 +1,9 @@
 package lungCancer;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class qolCurve extends CoeffecientPrep{
 
+    public JSONObject finalResults = new JSONObject();
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -85,7 +89,7 @@ public class qolCurve extends CoeffecientPrep{
 		return listNames;
 	}
 	
-	public List<double[][]> runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public void runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{	
 		
 		/*-----Variables needed---------
@@ -123,10 +127,16 @@ public class qolCurve extends CoeffecientPrep{
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
 
 	public double comorbVal(double score)
 	{

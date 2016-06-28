@@ -10,19 +10,29 @@
 	<%@ page import = "java.util.List" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = "java.util.Enumeration" %>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <%@ page import="org.json.JSONObject" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Limited Small-cell</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
-	
+    <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
+
 <%
-	Extensive exten = new Extensive();
-	String results = exten.runExtensive(request, response);
+        JSONObject resultList = new JSONObject();
+        Extensive exten = new Extensive();
+
+        exten.runExtensive(request, response);
+        resultList = exten.getFinalResults();
 %>
-<%@ include file="plotCurve.jspf" %>
+<script type="text/javascript">
+    window.onload = function() {
+        var x = <%=resultList%>;
+        showGraph(x);
+    }
+ </script>
 
 
 </head>

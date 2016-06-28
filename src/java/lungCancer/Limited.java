@@ -1,7 +1,11 @@
 package lungCancer;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,13 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Limited extends CoeffecientPrep{
 
+    JSONObject finalResults = new JSONObject();
+
 	/*------Methods-----
 	 * runLimited(request,response)--> Gets all parameters and calculates survival rate: returns string
 	 * createSession(request,response)--> creates session for needed parameters for calculations
 	 * 
 	 */
 	
-	public List<double[][]> runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public void  runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 
 		CoeffecientPrep prep = new CoeffecientPrep();
@@ -73,9 +79,10 @@ public class Limited extends CoeffecientPrep{
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
 	
 	//calculates natural log of the ratio of neutrophil and lymphocyte
@@ -112,7 +119,6 @@ public class Limited extends CoeffecientPrep{
 	}
 
 	
-	
 	public double redCellDistribution(double rdw)
 	{
 			double rdwRatio = Math.log(rdw);
@@ -140,8 +146,12 @@ public class Limited extends CoeffecientPrep{
 			}
 		return 1;
 	}
-	
-	
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
+
 	public static void main(String[] args) {
 	
 	}

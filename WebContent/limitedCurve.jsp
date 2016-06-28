@@ -4,26 +4,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import="lungCancer.Limited" %>
-	<%@ page import = "java.util.ArrayList" %>
-	<%@ page import = "java.util.HashMap" %>
-	<%@ page import = "java.util.Enumeration" %>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <%@ page import="org.json.JSONObject" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Limited Small-cell</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
-	
-<%
-//Uses java function from Limited.java/connection.java to calculate curve results
+    <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
 
-Limited limit = new Limited();
-String results = limit.runLimited(request, response);
+    <%
+//Uses java function from Limited.java/connection.java to calculate curve results
+    JSONObject resultsList  = new JSONObject();
+    Limited limit = new Limited();
+    limit.runLimited(request, response);
+    resultsList = limit.getFinalResults();
 %>
-<%@ include file="plotCurve.jspf" %>
+<script type="text/javascript">
+    window.onload = function() {
+    var x = <%=resultsList%>;
+    showGraph(x);
+    }
+</script>
+
 
 </head>
 <body>

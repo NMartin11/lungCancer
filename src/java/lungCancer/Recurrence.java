@@ -1,6 +1,9 @@
 package lungCancer;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Recurrence extends CoeffecientPrep {
 
+    JSONObject finalResults = new JSONObject();
+
 	/*----Methods----
 	 * runRecurrence(request,response) --> calculates curve for recurrence model
 	 * createSession(request,response) --> creates session to access needed variables later
@@ -20,7 +25,7 @@ public class Recurrence extends CoeffecientPrep {
 	 */
 	
 	
-	public List<double[][]> runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	public void runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -44,12 +49,19 @@ public class Recurrence extends CoeffecientPrep {
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = prep.calculate(prep.sumList);
 
-        return resultList;
+        finalResults = prep.resultAsJSON(resultList);
+
 	}
-	
-	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
+
+
+    public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String stage = request.getParameter("stage");
 		request.getSession().setAttribute("stage", stage);

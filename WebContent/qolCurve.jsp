@@ -6,22 +6,29 @@
 <head>
 	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import="lungCancer.qolCurve" %>
-	<%@ page import = "java.util.ArrayList" %>
-	<%@ page import = "java.util.HashMap" %>
-	<%@ page import = "java.util.Enumeration" %>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <%@ page import="org.json.JSONObject" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
-	
-<%
+    <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
+
+    <%
+    JSONObject resultList = new JSONObject();
 	qolCurve qol = new qolCurve();
-	String results = qol.runQOL(request, response);
+    qol.runQOL(request, response);
+    resultList = qol.getFinalResults();
 %>
-	<%@ include file="plotCurve.jspf" %>
+<script type="text/javascript">
+    window.onload = function() {
+    var x = <%=resultList%>;
+    showGraph(x);
+}
+</script>
+
 </head>
 <body>
 

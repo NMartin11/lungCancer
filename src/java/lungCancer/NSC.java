@@ -1,9 +1,7 @@
 package lungCancer;
 
-import net.sf.json.util.JSONBuilder;
 import org.json.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NSC extends CoeffecientPrep{
 
+    JSONObject finalResults = new JSONObject();
+
+
 	/*-----Methods-----
 	 * runNSC(request,response)--> Gets all parameters and calculates survival rate: returns string
 	 *  
 	 */
-    JSONObject finalResults = new JSONObject();
-    JSONArray finalArray = new JSONArray();
-    String str;
+
 	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException {
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -38,21 +37,13 @@ public class NSC extends CoeffecientPrep{
 		List<Object> list = prep.getCoefficients();
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-       List<double[][]> resultList = prep.calculate(prep.sumList);
+        List<double[][]> resultList = prep.calculate(prep.sumList);
 
-/*         Creates JSON Object and sets the treatment name as the key
-*         and the result list using that treatment
+/*       Creates JSON Object and sets the treatment name as the key
+*        and the result list using that treatment
 */
-        List<String> treatments = new ArrayList<>();
-        treatments = prep.usedTreatments;
-        //TODO: try json array in same format as var dataset from js page
-        for(int i = 0; i < treatments.size(); i++) {
-            JSONObject obj = new JSONObject();
-            obj.put("label", treatments.get(i));
-            obj.put("data", resultList.get(i));
-            finalResults.put(treatments.get(i),obj);
-        }
 
+       finalResults =  prep.resultAsJSON(resultList);
 
     }
 

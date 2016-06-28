@@ -1,5 +1,8 @@
 package lungCancer;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 
 import java.io.FileNotFoundException;
@@ -310,6 +313,20 @@ public class CoeffecientPrep extends HttpServlet{
     public ArrayList<String> getUsedTreatements()
     {
         return usedTreatments;
+    }
+
+    public JSONObject resultAsJSON(List<double[][]> resultList) throws JSONException {
+        JSONObject finalResults = new JSONObject();
+        List<String> t = new ArrayList<>();
+        t = getUsedTreatements();
+
+        for(int i = 0; i < t.size(); i++) {
+            JSONObject obj = new JSONObject();
+            obj.put("label", t.get(i));
+            obj.put("data", resultList.get(i));
+            finalResults.put(t.get(i),obj);
+        }
+        return finalResults;
     }
 
 	public static void main(String[] args) {
