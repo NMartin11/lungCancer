@@ -20,12 +20,6 @@ public class qolCurve extends CoeffecientPrep{
 	
 	private static final long serialVersionUID = 1L;
 	
-	/*-----Methods-----
-	 * run(request,response) 			--> Gets all parameters and calculates survival rate: returns string
-	 * qolVar(request,response) 		--> determines what comorbidities to use: returns Array List
-	 * createSession(request.response)	--> sets session for parameters ( age, treatment, gender, stage, celltype )
-	 */
-	
 	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		System.out.println("FROM New Patient JSP PAGE");
@@ -90,13 +84,7 @@ public class qolCurve extends CoeffecientPrep{
 	}
 	
 	public void runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
-	{	
-		
-		/*-----Variables needed---------
-		*Age		gender			stage	celltype	
-		*treatment	comorbidities	
-		*
-		*/
+	{
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("qolModel");
 		prep.setBaseline();
@@ -148,11 +136,6 @@ public class qolCurve extends CoeffecientPrep{
 		{
 			return 1;
 		}		
-	}
-	
-	public static void main(String[] args) {
-		
-
 	}
 
 }

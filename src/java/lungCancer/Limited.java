@@ -1,13 +1,10 @@
 package lungCancer;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Limited extends CoeffecientPrep{
 
     JSONObject finalResults = new JSONObject();
-
-	/*------Methods-----
-	 * runLimited(request,response)--> Gets all parameters and calculates survival rate: returns string
-	 * createSession(request,response)--> creates session for needed parameters for calculations
-	 * 
-	 */
 	
 	public void  runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
@@ -31,7 +22,6 @@ public class Limited extends CoeffecientPrep{
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
 		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		
@@ -76,7 +66,6 @@ public class Limited extends CoeffecientPrep{
 		list.remove(index + 1);
 		list.add(index + 1, ln_rdw);
 
-
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
         List<double[][]> resultList = new ArrayList<>();
@@ -95,8 +84,7 @@ public class Limited extends CoeffecientPrep{
 		nRatio = Math.log(n / l);
 		return nRatio;
 	}
-	
-	
+
 	//calculates natural log of the ratio of platelete and lymphocyte
 	public  double pRatio(double platelete, double lympho)
 	{	double result;
@@ -126,6 +114,8 @@ public class Limited extends CoeffecientPrep{
 			return rdwRatio;
 	}
 
+//    Getters
+
 	public double getHemo(double hbx)
 	{
 			double val = hbx;
@@ -152,8 +142,5 @@ public class Limited extends CoeffecientPrep{
         return this.finalResults;
     }
 
-	public static void main(String[] args) {
-	
-	}
 
 }

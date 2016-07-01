@@ -16,29 +16,14 @@ public class Recurrence extends CoeffecientPrep {
 
     JSONObject finalResults = new JSONObject();
 
-	/*----Methods----
-	 * runRecurrence(request,response) --> calculates curve for recurrence model
-	 * createSession(request,response) --> creates session to access needed variables later
-	 * getRiskScore(ArrayList) --> calculates risk score based on parameter values from postRecurrence.jsp
-	 * getRiskGroup(ArrayList) --> determines what risk group will be used based on risk score
-	 * 
-	 */
-	
-	
 	public void runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
-		/*-----Variables needed to calculate curve-----
-		 *gender	cell type	grade	smoke history
-		 *treatment	agedx		stage	
-		*/
-		
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("recurrence");
 		prep.setBaseline();
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
 		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		double score = getRiskScore(list);
@@ -138,9 +123,5 @@ public class Recurrence extends CoeffecientPrep {
 		}
 		return group;
 	}
-	
 
-	public static void main(String[] args) {
-
-    }
 }

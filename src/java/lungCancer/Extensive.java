@@ -1,7 +1,5 @@
 package lungCancer;
 
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -14,14 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Extensive extends CoeffecientPrep {
 
     JSONObject finalResults = new JSONObject();
-
-	/*------Methods----
-	 * runExtensive(request,response) throws ServletException, IOException
-	 * getMetas2(String) --> evaluates score and returns string: either param name or null value
-	 * createSession(request,response) --> creates session for needed variables for later use
-	 */
-
-	
 	
 	public void  runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
@@ -37,8 +27,6 @@ public class Extensive extends CoeffecientPrep {
 		prep.setBaseline();
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
-		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		
@@ -90,13 +78,6 @@ public class Extensive extends CoeffecientPrep {
 		ln_rdw = redCellDistribution(ln_rdw);
 		list.remove(index + 1);
 		list.add(index + 1, ln_rdw);
-				
-		
-		//Test to see values in list
-		for(int i = 0; i < list.size(); i++)
-		{
-			System.out.println("Params Used: " + list.get(i));
-		}
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
@@ -147,7 +128,7 @@ public class Extensive extends CoeffecientPrep {
 			return rdwRatio;
 	}
 	
-	
+//	Getters
 	
 	public double getMetas2(double meta2)
 	{
@@ -181,18 +162,10 @@ public class Extensive extends CoeffecientPrep {
 			}
 		return 1;
 	}
-	
-
-//    Getters
 
     public JSONObject getFinalResults()
     {
         return this.finalResults;
     }
-	
-	public static void main(String[] args) {
-		
-
-	}
 
 }

@@ -2,15 +2,12 @@ package lungCancer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,22 +17,21 @@ import javax.servlet.http.HttpSession;
 
 public class CoeffecientPrep extends HttpServlet{
 
-
 	private static final long serialVersionUID = 1L;
 	private List<Object> modelCoeff;
 	private List<Double> baseline = new ArrayList<Double>();
 	private HashMap<String,Double> model = new HashMap<String,Double>();
-	public String[] treatments;
-    private final String[] treatmentLists = {"background","surgery","chemo","radiation","surgchemo","surgradiation", "chemoradiation","surgradiationchemo","neoadjuvent","othertrt"};
+    private final String[] treatmentLists = {"background","surgery","chemo","radiation","surgchemo","surgradiation",
+                                                "chemoradiation","surgradiationchemo","neoadjuvent","othertrt"};
     public ArrayList<String> usedTreatments = new ArrayList<String>();
     public List<List<Object>> multipleLists = new ArrayList<List<Object>>();
     public List<Double> sumList = new ArrayList<Double>();
-    public List<double[][]> resultList = new ArrayList<double[][]>();
+    public List<double[][]> resultList = new ArrayList<>();
 
 	
 	
 	//----------------------Methods--------------------------
-	
+
 	//Sets values of Parameters and returns them in a list of objects
 	public void setCoefficients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
@@ -51,7 +47,7 @@ public class CoeffecientPrep extends HttpServlet{
 			{
 				testList.add(paramName);
 			}
-			String[] paramValues = request.getParameterValues(paramName); 
+			String[] paramValues = request.getParameterValues(paramName);
 			if(paramValues.length > 1)
 			{
 				for(int i = 0; i < paramValues.length; i++)
@@ -61,7 +57,7 @@ public class CoeffecientPrep extends HttpServlet{
 				}
 			}	else if(containsDigit(paramValues[0]))
 				{
-					double value = Double.parseDouble(paramValues[0]);			
+					double value = Double.parseDouble(paramValues[0]);
 					testList.add(value);
 				} else
 					{
@@ -239,7 +235,7 @@ public class CoeffecientPrep extends HttpServlet{
     * If two treatments were picked then there will be two list each using one treatment
     */
 	public List<Double> calcSum(List<List<Object>> p, HashMap<String, Double> m)
-	    {
+    {
 	        String str = "";
 	        double val,val2;
 	        double sum = 0;
@@ -328,12 +324,5 @@ public class CoeffecientPrep extends HttpServlet{
         }
         return finalResults;
     }
-
-	public static void main(String[] args) {
-
-
-	}
-
-
 
 }

@@ -12,17 +12,7 @@ public class NSC extends CoeffecientPrep{
 
     JSONObject finalResults = new JSONObject();
 
-
-	/*-----Methods-----
-	 * runNSC(request,response)--> Gets all parameters and calculates survival rate: returns string
-	 *  
-	 */
-
 	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException {
-		/*-----Variables needed to calculate curve-----
-		 *gender	cell type	grade	smoke history
-		 *treatment	agedx		stage
-		*/
 
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("background");
@@ -39,10 +29,6 @@ public class NSC extends CoeffecientPrep{
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
         List<double[][]> resultList = prep.calculate(prep.sumList);
 
-/*       Creates JSON Object and sets the treatment name as the key
-*        and the result list using that treatment
-*/
-
        finalResults =  prep.resultAsJSON(resultList);
 
     }
@@ -52,9 +38,5 @@ public class NSC extends CoeffecientPrep{
         return this.finalResults;
     }
 
-	
-	public static void main(String[] args) {
-
-	}
 
 }
