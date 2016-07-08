@@ -28,11 +28,16 @@ public class CoeffecientPrep extends HttpServlet{
     public List<Double> sumList = new ArrayList<Double>();
     public List<double[][]> resultList = new ArrayList<>();
 
-	
-	
+
 	//----------------------Methods--------------------------
 
-	//Sets values of Parameters and returns them in a list of objects
+    /***
+     * @Decription Sets Coefficients that are being used
+      * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
 	public void setCoefficients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
 		//Makes session for age, gender, treatment for later use
