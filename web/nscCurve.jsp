@@ -31,9 +31,13 @@
     CoeffecientPrep prep = new CoeffecientPrep();
     NSC nsc = new NSC();
 
+<<<<<<< HEAD
     treatments = nsc.getUsedTreatements();
+=======
+>>>>>>> refs/remotes/origin/master
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
+<<<<<<< HEAD
     JSONObject obj2 = new JSONObject();
     JSONArray arr = new JSONArray();
 //   TODO: make array that follows { label:[treatment name], data: [results] }
@@ -55,6 +59,8 @@
 //   TODO: make object that has treatment name as key and corresponding array as value
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 %>
 
 <script type="text/javascript">

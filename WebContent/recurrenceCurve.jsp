@@ -4,12 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import="lungCancer.Recurrence" %>
+<<<<<<< HEAD
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.HashMap" %>
 	<%@ page import = "java.util.Enumeration" %>
     <%@ page import="java.util.List" %>
+=======
+    <%@ page import="org.json.JSONObject" %>
+>>>>>>> refs/remotes/origin/master
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
@@ -17,13 +20,29 @@
 	<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
+<<<<<<< HEAD
 	
 <%
 //Calculates the results of the recurrence curve
 Recurrence recur = new Recurrence();
 List<List<double[]>> results = recur.runRecurrence(request, response);
+=======
+    <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
+
+ <%
+     JSONObject resultsList = new JSONObject();
+     Recurrence recur = new Recurrence();
+     recur.runRecurrence(request, response);
+
+     resultsList = recur.getFinalResults();
+>>>>>>> refs/remotes/origin/master
 %>
-	<%@ include file="plotCurve.jspf" %>
+<script type="text/javascript">
+    window.onload = function() {
+    var x = <%=resultsList%>;
+    showGraph(x);
+  }
+</script>
 	
 
 </head>
