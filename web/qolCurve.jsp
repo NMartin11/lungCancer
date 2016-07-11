@@ -6,14 +6,7 @@
 <head>
 	<%@ page import="lungCancer.CoeffecientPrep" %>
 	<%@ page import="lungCancer.qolCurve" %>
-<<<<<<< HEAD
-	<%@ page import = "java.util.ArrayList" %>
-	<%@ page import = "java.util.HashMap" %>
-	<%@ page import = "java.util.Enumeration" %>
-    <%@ page import="java.util.List" %>
-=======
     <%@ page import="org.json.JSONObject" %>
->>>>>>> refs/remotes/origin/master
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
 	<link href="examples.css" rel="stylesheet" type="text/css">
@@ -26,12 +19,8 @@
     <%
     JSONObject resultList = new JSONObject();
 	qolCurve qol = new qolCurve();
-<<<<<<< HEAD
-	List<List<double[]>> results = qol.runQOL(request, response);
-=======
     qol.runQOL(request, response);
     resultList = qol.getFinalResults();
->>>>>>> refs/remotes/origin/master
 %>
 <script type="text/javascript">
     window.onload = function() {

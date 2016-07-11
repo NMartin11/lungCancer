@@ -1,22 +1,27 @@
 package lungCancer;
 
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Limited extends CoeffecientPrep{
 
-	/*------Methods-----
-	 * runLimited(request,response)--> Gets all parameters and calculates survival rate: returns string
-	 * createSession(request,response)--> creates session for needed parameters for calculations
-	 * 
-	 */
-	
-	public List<double[][]> runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    JSONObject finalResults = new JSONObject();
+
+    /***
+     * Calls all necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
+	public void  runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 
 		CoeffecientPrep prep = new CoeffecientPrep();
@@ -25,7 +30,6 @@ public class Limited extends CoeffecientPrep{
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
 		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		
@@ -70,12 +74,12 @@ public class Limited extends CoeffecientPrep{
 		list.remove(index + 1);
 		list.add(index + 1, ln_rdw);
 
-
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
 	
 	//calculates natural log of the ratio of neutrophil and lymphocyte
@@ -88,8 +92,7 @@ public class Limited extends CoeffecientPrep{
 		nRatio = Math.log(n / l);
 		return nRatio;
 	}
-	
-	
+
 	//calculates natural log of the ratio of platelete and lymphocyte
 	public  double pRatio(double platelete, double lympho)
 	{	double result;
@@ -112,13 +115,14 @@ public class Limited extends CoeffecientPrep{
 	}
 
 	
-	
 	public double redCellDistribution(double rdw)
 	{
 			double rdwRatio = Math.log(rdw);
 			
 			return rdwRatio;
 	}
+
+//    Getters
 
 	public double getHemo(double hbx)
 	{
@@ -140,10 +144,11 @@ public class Limited extends CoeffecientPrep{
 			}
 		return 1;
 	}
-	
-	
-	public static void main(String[] args) {
-	
-	}
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
+
 
 }

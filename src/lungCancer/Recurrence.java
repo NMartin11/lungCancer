@@ -1,6 +1,9 @@
 package lungCancer;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,29 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Recurrence extends CoeffecientPrep {
 
-	/*----Methods----
-	 * runRecurrence(request,response) --> calculates curve for recurrence model
-	 * createSession(request,response) --> creates session to access needed variables later
-	 * getRiskScore(ArrayList) --> calculates risk score based on parameter values from postRecurrence.jsp
-	 * getRiskGroup(ArrayList) --> determines what risk group will be used based on risk score
-	 * 
-	 */
-	
-	
-	public List<double[][]> runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    JSONObject finalResults = new JSONObject();
+
+    /***
+     * Calls necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
+	public void runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
-		/*-----Variables needed to calculate curve-----
-		 *gender	cell type	grade	smoke history
-		 *treatment	agedx		stage	
-		*/
-		
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("recurrence");
 		prep.setBaseline();
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
 		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		double score = getRiskScore(list);
@@ -44,12 +42,19 @@ public class Recurrence extends CoeffecientPrep {
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = prep.calculate(prep.sumList);
 
-        return resultList;
+        finalResults = prep.resultAsJSON(resultList);
+
 	}
-	
-	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
+
+
+    public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String stage = request.getParameter("stage");
 		request.getSession().setAttribute("stage", stage);
@@ -126,9 +131,5 @@ public class Recurrence extends CoeffecientPrep {
 		}
 		return group;
 	}
-	
 
-	public static void main(String[] args) {
-
-    }
 }

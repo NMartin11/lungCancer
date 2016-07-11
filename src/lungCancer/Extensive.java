@@ -1,25 +1,27 @@
 package lungCancer;
 
-
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class Extensive extends CoeffecientPrep {
 
-	/*------Methods----
-	 * runExtensive(request,response) throws ServletException, IOException
-	 * getMetas2(String) --> evaluates score and returns string: either param name or null value
-	 * createSession(request,response) --> creates session for needed variables for later use
-	 */
+    JSONObject finalResults = new JSONObject();
 
-	
-	
-	public List<double[][]> runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    /***
+     * Calls necessary functions to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
+	public void  runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		/*-----Variables needed to calculate curve-----
 		 *gender	cell type	grade	smoke history
@@ -33,8 +35,6 @@ public class Extensive extends CoeffecientPrep {
 		prep.setBaseline();
 		prep.setCoefficients(request, response);
 		prep.addCoefficients((List<Object>) request.getSession().getAttribute("coeffList"));
-		System.out.println("Check coeffModel values " + prep.getCoefficients());
-
 
 		List<Object> list = prep.getCoefficients();
 		
@@ -86,25 +86,22 @@ public class Extensive extends CoeffecientPrep {
 		ln_rdw = redCellDistribution(ln_rdw);
 		list.remove(index + 1);
 		list.add(index + 1, ln_rdw);
-				
-		
-		//Test to see values in list
-		for(int i = 0; i < list.size(); i++)
-		{
-			System.out.println("Params Used: " + list.get(i));
-		}
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
-	
-		
-	
-	
-	//calculates natural log of the ratio of neutrophil and lymphocyte
+
+    /***
+     *
+     * calculates natural log of the ratio of neutrophil and lymphocyte
+     * @param neutro
+     * @param lympho
+     * @return
+     */
 	public double nRatio(double neutro, double lympho)
 	{
 		double n, l, nRatio;
@@ -114,10 +111,13 @@ public class Extensive extends CoeffecientPrep {
 		nRatio = Math.log(n / l);
 		return nRatio;
 	}
-	
-	
-	
-	//calculates natural log of the ratio of platelete and lymphocyte
+
+    /***
+     * calculates natural log of the ratio of platelete and lymphocyte
+     * @param platelete
+     * @param lympho
+     * @return
+     */
 	public  double pRatio(double platelete, double lympho)
 	{	double result;
 		double p, l, pRatio;
@@ -138,8 +138,11 @@ public class Extensive extends CoeffecientPrep {
 		return result;
 	}
 
-	
-	
+    /***
+     * Computes red cell distribution
+     * @param rdw
+     * @return
+     */
 	public double redCellDistribution(double rdw)
 	{
 			double rdwRatio = Math.log(rdw);
@@ -147,8 +150,9 @@ public class Extensive extends CoeffecientPrep {
 			return rdwRatio;
 	}
 	
-	
-	
+//	Getters
+
+
 	public double getMetas2(double meta2)
 	{
 			double val = meta2;
@@ -181,12 +185,10 @@ public class Extensive extends CoeffecientPrep {
 			}
 		return 1;
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		
 
-	}
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
 
 }

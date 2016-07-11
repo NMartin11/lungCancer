@@ -11,9 +11,7 @@
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.*" %>
-    <%@ page import="org.json.JSONArray" %>
-    <%@ page import="org.json.JSONObject" %>
-
+    <%@ page import="org.json.*" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Example</title>
@@ -23,54 +21,21 @@
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="flot/jquery.flot.crosshair.js"></script>
     <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
-    <script language="javascript" type="text/javascript" src="flot/createGraph.js"></script>
 <%
     //Uses java function from NSC.java/connection.java to calculate curve results
-    List<List<double[]>> resultList = new ArrayList<>();
-    List<String> treatments = new ArrayList<>();
-    CoeffecientPrep prep = new CoeffecientPrep();
+    JSONObject resultList = new JSONObject();
     NSC nsc = new NSC();
-
-<<<<<<< HEAD
-    treatments = nsc.getUsedTreatements();
-=======
->>>>>>> refs/remotes/origin/master
     nsc.runNSC(request,response);
     resultList = nsc.getFinalResults();
-<<<<<<< HEAD
-    JSONObject obj2 = new JSONObject();
-    JSONArray arr = new JSONArray();
-//   TODO: make array that follows { label:[treatment name], data: [results] }
-
-    for(int i = 0; i < treatments.size(); i++)
-    {
-        JSONObject obj = new JSONObject();
-
-        obj.put("label", treatments.get(i));
-        obj.put("data", resultList.get(i));
-        obj2.put(treatments.get(i), obj);
-        System.out.println("This is obj2 " + obj2);
-
-    }
-
-
-
-
-//   TODO: make object that has treatment name as key and corresponding array as value
-
-
-=======
->>>>>>> refs/remotes/origin/master
 %>
 
 <script type="text/javascript">
     window.onload = function() {
-        var x = <%=obj2%>;
+        var x = <%=resultList%>;
 //        window.alert(x['chemo']);
 //        window.alert(x['radiation']);
         showGraph(x);
     }
-
 </script>
 
 </head>

@@ -1,6 +1,9 @@
 package lungCancer;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -13,15 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 
 public class qolCurve extends CoeffecientPrep{
 
+    public JSONObject finalResults = new JSONObject();
 	
 	private static final long serialVersionUID = 1L;
-	
-	/*-----Methods-----
-	 * run(request,response) 			--> Gets all parameters and calculates survival rate: returns string
-	 * qolVar(request,response) 		--> determines what comorbidities to use: returns Array List
-	 * createSession(request.response)	--> sets session for parameters ( age, treatment, gender, stage, celltype )
-	 */
-	
+
+    /**
+     * Calls necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
 	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		System.out.println("FROM New Patient JSP PAGE");
@@ -85,14 +90,8 @@ public class qolCurve extends CoeffecientPrep{
 		return listNames;
 	}
 	
-	public List<double[][]> runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{	
-		
-		/*-----Variables needed---------
-		*Age		gender			stage	celltype	
-		*treatment	comorbidities	
-		*
-		*/
+	public void runQOL(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
+	{
 		CoeffecientPrep prep = new CoeffecientPrep();
 		prep.setModel("qolModel");
 		prep.setBaseline();
@@ -123,10 +122,16 @@ public class qolCurve extends CoeffecientPrep{
 
         list = prep.removeTreatments(list);
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
-        prep.calculate(prep.sumList);
+        List<double[][]> resultList = new ArrayList<>();
+        resultList = prep.calculate(prep.sumList);
 
-		return resultList;
+        finalResults = prep.resultAsJSON(resultList);
 	}
+
+    public JSONObject getFinalResults()
+    {
+        return this.finalResults;
+    }
 
 	public double comorbVal(double score)
 	{
@@ -138,11 +143,6 @@ public class qolCurve extends CoeffecientPrep{
 		{
 			return 1;
 		}		
-	}
-	
-	public static void main(String[] args) {
-		
-
 	}
 
 }

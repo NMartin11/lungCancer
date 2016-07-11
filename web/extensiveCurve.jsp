@@ -21,16 +21,10 @@
     <script language="javascript" type="text/javascript" src="javascript/showGraph.js"></script>
 
 <%
-<<<<<<< HEAD
-	Extensive exten = new Extensive();
-	List<List<double[]>> results = exten.runExtensive(request, response);
-=======
         JSONObject resultList = new JSONObject();
         Extensive exten = new Extensive();
-
         exten.runExtensive(request, response);
         resultList = exten.getFinalResults();
->>>>>>> refs/remotes/origin/master
 %>
 <script type="text/javascript">
     window.onload = function() {
