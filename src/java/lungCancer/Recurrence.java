@@ -16,6 +16,14 @@ public class Recurrence extends CoeffecientPrep {
 
     JSONObject finalResults = new JSONObject();
 
+    /***
+     * Calls necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
 	public void runRecurrence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		CoeffecientPrep prep = new CoeffecientPrep();

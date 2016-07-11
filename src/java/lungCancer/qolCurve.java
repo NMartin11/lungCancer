@@ -19,7 +19,14 @@ public class qolCurve extends CoeffecientPrep{
     public JSONObject finalResults = new JSONObject();
 	
 	private static final long serialVersionUID = 1L;
-	
+
+    /**
+     * Calls necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
 	public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		System.out.println("FROM New Patient JSP PAGE");

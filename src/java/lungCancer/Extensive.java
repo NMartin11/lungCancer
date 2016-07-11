@@ -12,7 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 public class Extensive extends CoeffecientPrep {
 
     JSONObject finalResults = new JSONObject();
-	
+
+    /***
+     * Calls necessary functions to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
 	public void  runExtensive(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 		/*-----Variables needed to calculate curve-----
@@ -87,8 +95,13 @@ public class Extensive extends CoeffecientPrep {
         finalResults = prep.resultAsJSON(resultList);
 	}
 
-	
-	//calculates natural log of the ratio of neutrophil and lymphocyte
+    /***
+     *
+     * calculates natural log of the ratio of neutrophil and lymphocyte
+     * @param neutro
+     * @param lympho
+     * @return
+     */
 	public double nRatio(double neutro, double lympho)
 	{
 		double n, l, nRatio;
@@ -98,8 +111,13 @@ public class Extensive extends CoeffecientPrep {
 		nRatio = Math.log(n / l);
 		return nRatio;
 	}
-	
-	//calculates natural log of the ratio of platelete and lymphocyte
+
+    /***
+     * calculates natural log of the ratio of platelete and lymphocyte
+     * @param platelete
+     * @param lympho
+     * @return
+     */
 	public  double pRatio(double platelete, double lympho)
 	{	double result;
 		double p, l, pRatio;
@@ -120,7 +138,11 @@ public class Extensive extends CoeffecientPrep {
 		return result;
 	}
 
-	
+    /***
+     * Computes red cell distribution
+     * @param rdw
+     * @return
+     */
 	public double redCellDistribution(double rdw)
 	{
 			double rdwRatio = Math.log(rdw);
@@ -129,7 +151,8 @@ public class Extensive extends CoeffecientPrep {
 	}
 	
 //	Getters
-	
+
+
 	public double getMetas2(double meta2)
 	{
 			double val = meta2;

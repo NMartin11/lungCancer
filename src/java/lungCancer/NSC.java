@@ -12,6 +12,14 @@ public class NSC extends CoeffecientPrep{
 
     JSONObject finalResults = new JSONObject();
 
+    /***
+     * Calls necessary methods to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
 	public void runNSC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException {
 
 		CoeffecientPrep prep = new CoeffecientPrep();

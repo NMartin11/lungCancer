@@ -12,7 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 public class Limited extends CoeffecientPrep{
 
     JSONObject finalResults = new JSONObject();
-	
+
+    /***
+     * Calls all necessary function to generate results
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws JSONException
+     */
 	public void  runLimited(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JSONException
 	{
 
