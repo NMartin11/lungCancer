@@ -91,7 +91,7 @@ images (like Google Maps).
 
             callback();
         });
-    }
+    };
     
     $.plot.image.load = function (urls, callback) {
         var missing = urls.length, loaded = {};
@@ -110,7 +110,7 @@ images (like Google Maps).
 
             $('<img />').load(handler).error(handler).attr('src', url);
         });
-    }
+    };
     
     function drawSeries(plot, ctx, series) {
         var plotOffset = plot.getPlotOffset();

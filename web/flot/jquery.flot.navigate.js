@@ -200,11 +200,11 @@ Licensed under the MIT License ~ http://threedubmedia.googlecode.com/files/MIT-L
                 args = {};
             
             if (!args.amount)
-                args.amount = plot.getOptions().zoom.amount
+                args.amount = plot.getOptions().zoom.amount;
 
             args.amount = 1 / args.amount;
             plot.zoom(args);
-        }
+        };
         
         plot.zoom = function (args) {
             if (!args)
@@ -263,7 +263,7 @@ Licensed under the MIT License ~ http://threedubmedia.googlecode.com/files/MIT-L
             
             if (!args.preventEvent)
                 plot.getPlaceholder().trigger("plotzoom", [ plot ]);
-        }
+        };
 
         plot.pan = function (args) {
             var delta = {
@@ -311,7 +311,7 @@ Licensed under the MIT License ~ http://threedubmedia.googlecode.com/files/MIT-L
             
             if (!args.preventEvent)
                 plot.getPlaceholder().trigger("plotpan", [ plot ]);
-        }
+        };
 
         function shutdown(plot, eventHolder) {
             eventHolder.unbind(plot.getOptions().zoom.trigger, onZoomClick);
