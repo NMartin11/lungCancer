@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="lungCancer">
         <wb-resource deploy-path="/lungCancer" source-path="/src"/>
@@ -7,13 +6,3 @@
         <property name="java-output-path" value="/lungCancer/build/classes"/>
     </wb-module>
 </project-modules>
-=======
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="lungCancer">
-        <wb-resource deploy-path="/WEB-INF" source-path="/src"/>
-        <wb-resource deploy-path="/" source-path="/web"/>
-        <property name="context-root" value="lungCancer"/>
-        <property name="java-output-path" value="/lungCancer/build/classes"/>
-    </wb-module>
-</project-modules>
->>>>>>> refs/remotes/origin/eclipseBranch
