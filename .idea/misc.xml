@@ -44,6 +44,7 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
+<<<<<<< HEAD
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -51,6 +52,8 @@
       </list>
     </option>
   </component>
+=======
+>>>>>>> refs/remotes/origin/eclipseBranch
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />

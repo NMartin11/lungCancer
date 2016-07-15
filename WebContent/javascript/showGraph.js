@@ -3,8 +3,7 @@
  */
 
     function showGraph(r) {
-    //var survivalRate = [] pass string from java to JSon
-    //TODO: write loop to put results into r
+    //Not displaying alert window, which means it may not be calling this function
      var data = JSON.parse(r);
     window.alert(r);
 
