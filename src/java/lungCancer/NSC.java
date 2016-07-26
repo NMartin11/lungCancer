@@ -1,7 +1,9 @@
 package lungCancer;
 
+import com.google.gson.JsonObject;
 import org.json.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NSC extends CoeffecientPrep{
 
-    JSONObject finalResults = new JSONObject();
+    JsonObject finalResults = new JsonObject();
+    List<String> usedTreatments = new ArrayList<>();
+    List<double[][]> data = new ArrayList<double[][]>();
 
     /***
      * Calls necessary methods to generate results
@@ -34,17 +38,28 @@ public class NSC extends CoeffecientPrep{
          */
 		List<Object> list = prep.getCoefficients();
         list = prep.removeTreatments(list);
+        usedTreatments = prep.getUsedTreatements();
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
+        data = prep.getResultList();
         List<double[][]> resultList = prep.calculate(prep.sumList);
 
        finalResults =  prep.resultAsJSON(resultList);
 
     }
 
-    public JSONObject getFinalResults()
+    public List<String> getUsedTreatments() {
+        return this.usedTreatments;
+    }
+
+    public List<double[][]> getData() {
+        return data;
+    }
+
+    public JsonObject getFinalResults()
     {
         return this.finalResults;
     }
+
 
 
 }

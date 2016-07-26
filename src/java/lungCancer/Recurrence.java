@@ -1,6 +1,7 @@
 package lungCancer;
 
 
+import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Recurrence extends CoeffecientPrep {
 
-    JSONObject finalResults = new JSONObject();
+    JsonObject finalResults = new JsonObject();
 
     /***
      * Calls necessary function to generate results
@@ -48,11 +49,9 @@ public class Recurrence extends CoeffecientPrep {
 
 	}
 
-    public JSONObject getFinalResults()
-    {
+    public JsonObject getFinalResults() {
         return this.finalResults;
     }
-
 
     public void createSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{

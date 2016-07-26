@@ -15,14 +15,6 @@
 </head>
 <body>
 
-<!-- Variables
-	Cocancer			= cocancer		= y/n
-	Co-lung cancer		= colung		= y/n
-	Co-other diseases	= coother		= y/n
-	Fatigue				= fatigue		= 1-10
-	Cough				= cough			= 1-10
-	Short of Breath		= shortbreath 	= 1-10
- -->
 
 <form action = "qolCurve.jsp" method = "post">
 <h3>Comorbidities

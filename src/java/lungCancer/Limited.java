@@ -1,5 +1,6 @@
 package lungCancer;
 
+import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Limited extends CoeffecientPrep{
 
-    JSONObject finalResults = new JSONObject();
+    JsonObject finalResults = new JsonObject();
 
     /***
      * Calls all necessary function to generate results
@@ -145,7 +146,7 @@ public class Limited extends CoeffecientPrep{
 		return 1;
 	}
 
-    public JSONObject getFinalResults()
+    public JsonObject getFinalResults()
     {
         return this.finalResults;
     }

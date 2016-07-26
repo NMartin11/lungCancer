@@ -1,6 +1,7 @@
 package lungCancer;
 
 
+import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class qolCurve extends CoeffecientPrep{
 
-    public JSONObject finalResults = new JSONObject();
+    public JsonObject finalResults = new JsonObject();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -128,7 +129,7 @@ public class qolCurve extends CoeffecientPrep{
         finalResults = prep.resultAsJSON(resultList);
 	}
 
-    public JSONObject getFinalResults()
+    public JsonObject getFinalResults()
     {
         return this.finalResults;
     }

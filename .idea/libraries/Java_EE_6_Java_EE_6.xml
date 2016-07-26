@@ -13,6 +13,7 @@
       <root url="jar://C:/Program Files/Java/java-json.jar!/" />
       <root url="jar://C:/Program Files/Java/json-lib-2.4-jdk15.jar!/" />
       <root url="jar://C:/taglibs-standard-impl-1.2.5.jar!/" />
+      <root url="jar://C:/Program Files/Java/gson-2.2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
