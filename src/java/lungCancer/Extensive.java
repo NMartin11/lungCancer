@@ -2,7 +2,7 @@ package lungCancer;
 
 import com.google.gson.JsonObject;
 import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Extensive extends CoeffecientPrep {
 
-    JsonObject finalResults = new JsonObject();
 
+    JsonObject finalResults = new JsonObject();
+    List<String> usedTreatments = new ArrayList<>();
+    List<double[][]> data = new ArrayList<double[][]>();
     /***
      * Calls necessary functions to generate results
      *
@@ -89,6 +91,7 @@ public class Extensive extends CoeffecientPrep {
         list.add(index + 1, ln_rdw);
 
         list = prep.removeTreatments(list);
+        usedTreatments = prep.getUsedTreatements();
         prep.calcSum(prep.MultipleTreatmentList(list), prep.getModel());
         List<double[][]> resultList = new ArrayList<>();
         resultList = prep.calculate(prep.sumList);
@@ -177,6 +180,9 @@ public class Extensive extends CoeffecientPrep {
         return 1;
     }
 
+    public List<String> getUsedTreatments() {
+        return this.usedTreatments;
+    }
     public JsonObject getFinalResults() {
         return this.finalResults;
     }

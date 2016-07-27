@@ -34,7 +34,6 @@
     resultList = nsc.getFinalResults();
     List<String[]> tempList = new ArrayList<>();
     List<String> treatments = nsc.getUsedTreatments();
-    JsonObject chemo = resultList.get("chemo").getAsJsonObject();
     JsonObject data = new JsonObject();
     for(String usedTreats : treatments) {
         JsonObject tempObj = resultList.get(usedTreats).getAsJsonObject();

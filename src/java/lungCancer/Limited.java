@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Limited extends CoeffecientPrep{
 
     JsonObject finalResults = new JsonObject();
+    List<String> usedTreatments = new ArrayList<>();
+    List<double[][]> data = new ArrayList<double[][]>();
 
     /***
      * Calls all necessary function to generate results
@@ -76,6 +78,7 @@ public class Limited extends CoeffecientPrep{
 		list.add(index + 1, ln_rdw);
 
         list = prep.removeTreatments(list);
+        usedTreatments = prep.getUsedTreatements();
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
         List<double[][]> resultList = new ArrayList<>();
         resultList = prep.calculate(prep.sumList);
@@ -151,5 +154,8 @@ public class Limited extends CoeffecientPrep{
         return this.finalResults;
     }
 
+    public List<String> getUsedTreatments() {
+        return this.usedTreatments;
+    }
 
 }
