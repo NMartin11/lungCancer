@@ -1,9 +1,9 @@
 package lungCancer;
 
 
+import com.google.gson.JsonObject;
 import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.google.gson.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class qolCurve extends CoeffecientPrep{
 
-    public JSONObject finalResults = new JSONObject();
-	
+
+    JsonObject finalResults = new JsonObject();
+    List<String> usedTreatments = new ArrayList<>();
+    List<double[][]> data = new ArrayList<double[][]>();
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -121,6 +123,7 @@ public class qolCurve extends CoeffecientPrep{
 		list.add(index + 1,comorbVal(dyspnea));
 
         list = prep.removeTreatments(list);
+        usedTreatments = prep.getUsedTreatements();
         prep.calcSum(prep.MultipleTreatmentList(list),prep.getModel());
         List<double[][]> resultList = new ArrayList<>();
         resultList = prep.calculate(prep.sumList);
@@ -128,9 +131,13 @@ public class qolCurve extends CoeffecientPrep{
         finalResults = prep.resultAsJSON(resultList);
 	}
 
-    public JSONObject getFinalResults()
+    public JsonObject getFinalResults()
     {
         return this.finalResults;
+    }
+
+    public List<String> getUsedTreatments() {
+        return this.usedTreatments;
     }
 
 	public double comorbVal(double score)

@@ -1,5 +1,7 @@
 package lungCancer;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -370,14 +372,22 @@ public class CoeffecientPrep extends HttpServlet{
         return usedTreatments;
     }
 
+    public List<Double> getSumList() {
+        return this.sumList;
+    }
+
+    public List<double[][]> getResultList() {
+        return this.resultList;
+    }
+
     /***
      * Returns the results as a json object
      * @param resultList
      * @return
      * @throws JSONException
      */
-    public JSONObject resultAsJSON(List<double[][]> resultList) throws JSONException {
-        JSONObject finalResults = new JSONObject();
+    public JsonObject resultAsJSON(List<double[][]> resultList) throws JSONException {
+        JsonObject finalResults = new JsonObject();
         List<String> t = new ArrayList<>();
         t = getUsedTreatements();
 
@@ -385,7 +395,9 @@ public class CoeffecientPrep extends HttpServlet{
             JSONObject obj = new JSONObject();
             obj.put("label", t.get(i));
             obj.put("data", resultList.get(i));
-            finalResults.put(t.get(i),obj);
+            JsonParser parser = new JsonParser();
+
+            finalResults.add(t.get(i),parser.parse(obj.toString()));
         }
         return finalResults;
     }
